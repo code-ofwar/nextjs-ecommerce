@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { slugify } from "zod";
 
 export const registerSchema = z.object({
   name: z.string().max(30).min(2),
@@ -29,4 +29,14 @@ export const updateProductSchema = z.object({
   stock: z.int().optional(),
   price: z.number().optional(),
   categoryId: z.int().optional(),
+});
+
+export const createCategorySchema = z.object({
+  name: z.string(),
+  slug: z.string(),
+});
+
+export const updateCategorySchema = z.object({
+  name: z.string().optional(),
+  slug: z.string().optional(),
 });

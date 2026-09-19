@@ -28,3 +28,13 @@ export type updateProductDto = {
   image?: string;
   categoryId?: number;
 };
+
+export type CreateCategoryDto = {
+  name: string;
+  slug: string;
+};
+
+export type UpdateCategoryDto = {
+  name?: string;
+  slug?: string;
+};
