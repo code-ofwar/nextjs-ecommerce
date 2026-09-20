@@ -38,3 +38,8 @@ export type UpdateCategoryDto = {
   name?: string;
   slug?: string;
 };
+
+export type AddProductDto = {
+  productId: number;
+  quantity: number;
+};

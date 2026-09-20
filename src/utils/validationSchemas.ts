@@ -40,3 +40,8 @@ export const updateCategorySchema = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
 });
+
+export const addProductSchema = z.object({
+  productId: z.number(),
+  quantity: z.number(),
+});
