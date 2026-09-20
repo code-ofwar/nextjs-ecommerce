@@ -1,6 +1,6 @@
 import { db } from "@/prisma/db";
-import { AddProductDto } from "@/utils/dtos";
-import { addProductSchema } from "@/utils/validationSchemas";
+import { AddCarttDto } from "@/utils/dtos";
+import { addCartSchema } from "@/utils/validationSchemas";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -64,9 +64,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = (await request.json()) as AddProductDto;
+    const body = (await request.json()) as AddCarttDto;
 
-    const validation = addProductSchema.safeParse(body);
+    const validation = addCartSchema.safeParse(body);
     if (!validation.success) {
       return NextResponse.json(
         { message: "validation failed" },
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     const product = await db.orm.public.Product.first({ id: productId });
     if (!product) {
       return NextResponse.json(
-        { message: "product not found" },
+        { message: "product not found in cart" },
         { status: 404 },
       );
     }

@@ -39,7 +39,16 @@ export type UpdateCategoryDto = {
   slug?: string;
 };
 
-export type AddProductDto = {
+export type AddCarttDto = {
   productId: number;
   quantity: number;
+};
+
+export type UpdateCartDto = {
+  productId: number;
+  quantity: number;
+};
+
+export type DeleteCartDto = {
+  productId: number;
 };

@@ -41,7 +41,16 @@ export const updateCategorySchema = z.object({
   slug: z.string().optional(),
 });
 
-export const addProductSchema = z.object({
-  productId: z.number(),
-  quantity: z.number(),
+export const addCartSchema = z.object({
+  productId: z.int(),
+  quantity: z.int().min(1),
+});
+
+export const updateCartSchema = z.object({
+  productId: z.int(),
+  quantity: z.int().min(1)
+});
+
+export const deleteCartSchema = z.object({
+  productId: z.int(),
 });
