@@ -54,3 +54,24 @@ export const updateCartSchema = z.object({
 export const deleteCartSchema = z.object({
   productId: z.int(),
 });
+
+export const createOrderSchema = z.object({
+  status: z.enum([
+    "PENDING",
+    "PROCESSING",
+    "SHIPPED",
+    "DELIVERED",
+    "CANCELLED",
+  ]),
+  totalPrice: z.number()
+})
+
+export const updateOrderSchema = z.object({
+  status: z.enum([
+    "PENDING",
+    "PROCESSING",
+    "SHIPPED",
+    "DELIVERED",
+    "CANCELLED",
+  ]),
+})

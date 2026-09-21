@@ -52,3 +52,21 @@ export type UpdateCartDto = {
 export type DeleteCartDto = {
   productId: number;
 };
+
+enum OrderStatus {
+  PENDING,
+  PROCESSING,
+  SHIPPED,
+  DELIVERED,
+  CANCELLED,
+}
+
+export type CreateOrderDto = {
+  status: OrderStatus;
+  totalPrice: number;
+};
+
+export type UpdateOrderDto = {
+  status: OrderStatus
+}
+
