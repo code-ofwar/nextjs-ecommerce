@@ -1,4 +1,6 @@
 import { db } from "@/prisma/db";
+import { CreateOrderDto } from "@/utils/dtos";
+import { createOrderSchema } from "@/utils/validationSchemas";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -11,6 +13,19 @@ export async function POST(request: NextRequest) {
         { status: 401 },
       );
     }
+
+    const body = (await request.json()) as CreateOrderDto;
+
+    const validation = createOrderSchema.safeParse(body);
+    if (!validation.success) {
+      return NextResponse.json(
+        { message: "validation failed", errors: validation.error.issues },
+        { status: 400 },
+      );
+    }
+
+    const { fullName, phone, country, city, address, postalCode } =
+      validation.data;
 
     const cart = await db.orm.public.Cart.first({ userId: user.id });
     if (!cart) {
@@ -52,6 +67,12 @@ export async function POST(request: NextRequest) {
       const order = await tx.orm.public.Order.create({
         userId: user.id,
         totalPrice,
+        fullName,
+        phone,
+        country,
+        city,
+        address,
+        postalCode,
       });
 
       for (const { item, product } of cartProducts) {
@@ -94,24 +115,23 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const order = await db.orm.public.Order.where({ userId: user.id }).all();
+    const orders = await db.orm.public.Order.where({ userId: user.id }).all();
 
-    const orders = [];
-    for (const item of order) {
-      const orderItem = await db.orm.public.OrderItem.where({
-        orderId: item.id,
+    const ordersWithItems = [];
+
+    for (const order of orders) {
+      const orderItems = await db.orm.public.OrderItem.where({
+        orderId: order.id,
       }).all();
 
-      orders.push({
-        id: item.id,
-        status: item.status,
-        totalPrice: item.totalPrice,
-        createdAt: item.createdAt,
-        orderItem,
+      ordersWithItems.push({
+        order,
+
+        orderItems,
       });
     }
 
-    return NextResponse.json({ orders }, { status: 200 });
+    return NextResponse.json({ orders: ordersWithItems }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { message: "internal server error" },

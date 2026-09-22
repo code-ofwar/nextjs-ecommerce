@@ -12,7 +12,7 @@ export async function GET({ params }: singleParamsProps) {
     const product = await db.orm.public.Product.first({ id: parseInt(id) });
     if (!product) {
       return NextResponse.json(
-        { message: "product not founde" },
+        { message: "product not found" },
         { status: 404 },
       );
     }

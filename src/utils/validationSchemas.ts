@@ -48,7 +48,7 @@ export const addCartSchema = z.object({
 
 export const updateCartSchema = z.object({
   productId: z.int(),
-  quantity: z.int().min(1)
+  quantity: z.int().min(1),
 });
 
 export const deleteCartSchema = z.object({
@@ -63,8 +63,14 @@ export const createOrderSchema = z.object({
     "DELIVERED",
     "CANCELLED",
   ]),
-  totalPrice: z.number()
-})
+  totalPrice: z.number(),
+  fullName: z.string().min(2).max(40),
+  phone: z.string().max(20),
+  country: z.string().min(2).max(40),
+  city: z.string().min(2).max(40),
+  address: z.string().min(2).max(300),
+  postalCode: z.string().min(4).max(30),
+});
 
 export const updateOrderSchema = z.object({
   status: z.enum([
@@ -74,4 +80,6 @@ export const updateOrderSchema = z.object({
     "DELIVERED",
     "CANCELLED",
   ]),
-})
+});
+
+

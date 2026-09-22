@@ -64,9 +64,15 @@ enum OrderStatus {
 export type CreateOrderDto = {
   status: OrderStatus;
   totalPrice: number;
+  fullName: string;
+  phone: string;
+  country: string;
+  city: string;
+  address: string;
+  postalCode: string;
 };
 
 export type UpdateOrderDto = {
-  status: OrderStatus
-}
+  status: OrderStatus;
+};
 
