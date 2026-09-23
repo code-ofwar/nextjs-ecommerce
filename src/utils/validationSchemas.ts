@@ -1,4 +1,4 @@
-import z, { slugify } from "zod";
+import z from "zod";
 
 export const registerSchema = z.object({
   name: z.string().max(30).min(2),
@@ -56,16 +56,8 @@ export const deleteCartSchema = z.object({
 });
 
 export const createOrderSchema = z.object({
-  status: z.enum([
-    "PENDING",
-    "PROCESSING",
-    "SHIPPED",
-    "DELIVERED",
-    "CANCELLED",
-  ]),
-  totalPrice: z.number(),
   fullName: z.string().min(2).max(40),
-  phone: z.string().max(20),
+  phone: z.string().min(7).max(20),
   country: z.string().min(2).max(40),
   city: z.string().min(2).max(40),
   address: z.string().min(2).max(300),
@@ -82,4 +74,17 @@ export const updateOrderSchema = z.object({
   ]),
 });
 
+export const createReviewSchema = z.object({
+  comment: z.string().max(500).optional(),
+  productId: z.int(),
+  rating: z.int().min(1).max(5),
+});
 
+export const updateReviewSchema = z
+  .object({
+    comment: z.string().max(500).optional(),
+    rating: z.int().min(1).max(5).optional(),
+  })
+  .refine((data) => data.comment !== undefined || data.rating !== undefined, {
+    message: "at least one field is required",
+  });

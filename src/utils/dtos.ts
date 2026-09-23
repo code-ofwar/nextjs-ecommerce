@@ -76,3 +76,13 @@ export type UpdateOrderDto = {
   status: OrderStatus;
 };
 
+export type CreateReviewDto = {
+  comment?: string;
+  productId: number;
+  rating: number;
+};
+
+export type UpdateReviewDto = {
+  comment?: string;
+  rating?: number;
+}

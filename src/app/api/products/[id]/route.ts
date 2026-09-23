@@ -8,8 +8,14 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET({ params }: singleParamsProps) {
   try {
     const { id } = await params;
+    const parseId = parseInt(id);
 
-    const product = await db.orm.public.Product.first({ id: parseInt(id) });
+    const product = await db.orm.public.Product.where({ id: parseId })
+      .include("reviews", (review) =>
+        review.include("user", (user) => user.select("id", "name")),
+      )
+      .first();
+
     if (!product) {
       return NextResponse.json(
         { message: "product not found" },
@@ -82,7 +88,7 @@ export async function DELETE(
     }
 
     const { id } = await params;
-    
+
     const product = await db.orm.public.Product.first({
       id: parseInt(id),
     });
