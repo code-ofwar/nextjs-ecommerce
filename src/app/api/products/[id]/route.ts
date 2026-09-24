@@ -5,7 +5,7 @@ import { updateProductSchema } from "@/utils/validationSchemas";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET({ params }: singleParamsProps) {
+export async function GET(request: NextRequest, { params }: singleParamsProps) {
   try {
     const { id } = await params;
     const parseId = parseInt(id);
@@ -25,6 +25,8 @@ export async function GET({ params }: singleParamsProps) {
 
     return NextResponse.json({ product }, { status: 200 });
   } catch (error) {
+    console.error(error);
+
     return NextResponse.json(
       { message: "internal server error" },
       { status: 500 },

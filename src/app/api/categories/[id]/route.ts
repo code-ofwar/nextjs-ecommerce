@@ -5,20 +5,22 @@ import { updateCategorySchema } from "@/utils/validationSchemas";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET({ params }: singleParamsProps) {
+export async function GET(request: NextRequest, { params }: singleParamsProps) {
   try {
     const { id } = await params;
-    const category = await db.orm.public.Category.first({ id: parseInt(id) });
-    
+    const parseId = parseInt(id);
+    const category = await db.orm.public.Category.first({ id: parseId });
+
     if (!category) {
       return NextResponse.json(
         { message: "category not found" },
         { status: 404 },
       );
     }
-    
+
     return NextResponse.json({ category }, { status: 200 });
   } catch (error) {
+
     return NextResponse.json(
       { message: "internal server error" },
       { status: 500 },
