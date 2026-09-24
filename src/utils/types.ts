@@ -7,3 +7,14 @@ export type JWTPayload = {
 export type singleParamsProps = {
   params: Promise<{ id: string }>;
 };
+
+export type Product = {
+  id: number;
+  name: string;
+  slug: string;
+  description: string | null;
+  price: number;
+  stock: number;
+  image: string;
+  categoryId: number;
+};

@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET() {
   try {
     const products = await db.orm.public.Product.all();
-    return NextResponse.json({ products }, { status: 200 });
+    return NextResponse.json( products , { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { message: "internal server error" },
