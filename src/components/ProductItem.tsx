@@ -2,23 +2,24 @@ import { Product } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
 
-type ProductMap = {
+type ProductItemProps = {
   product: Product;
 };
 
-const ProductItem = ({ product }: ProductMap) => {
+const ProductItem = ({ product }: ProductItemProps) => {
   return (
     <div className="w-full max-w-xs overflow-hidden rounded-xl border border-border bg-card shadow-sm">
       <div className="relative aspect-square">
-        {/* <Image
-          src={product.image || "/images/no-image.jpg"}
+        <Image
+          src={
+            product.image?.startsWith("/")
+              ? product.image
+              : "/images/no-image.jpg"
+          }
           alt={product.name}
           fill
           className="object-cover"
-        /> */}
-        <span className="flex h-full items-center justify-center text-gray-500">
-          No Image
-        </span>
+        />
       </div>
 
       <div className="p-4">
