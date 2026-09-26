@@ -22,12 +22,12 @@ const Navbar = () => {
             Cart
           </Link>
 
-          <Link href="/login" className="text-muted hover:text-foreground">
+          <Link href="/auth/login" className="text-muted hover:text-foreground">
             Login
           </Link>
 
           <Link
-            href="/register"
+            href="/auth/register"
             className="rounded-lg bg-primary px-4 py-2 text-white hover:bg-primary-hover"
           >
             Register
