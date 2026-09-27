@@ -1,10 +1,23 @@
+"use client";
+
+import { DOMAIN } from "@/utils/constants";
 import { ReviewWithUser } from "@/utils/types";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
+
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 type ReviewListProps = {
   reviews: ReviewWithUser[];
+  userId?: number;
+  isAdmin?: boolean;
 };
 
-const ReviewList = ({ reviews }: ReviewListProps) => {
+const ReviewList = ({ reviews, userId, isAdmin }: ReviewListProps) => {
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
   if (reviews.length === 0) {
     return (
       <div className="rounded-lg border border-border bg-card p-6">
@@ -12,6 +25,20 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
       </div>
     );
   }
+
+  const ReviewDeleteHandler = async (reviewId: number) => {
+    try {
+      if (confirm("You sure you want delete your review?")) {
+        await axios.delete(`${DOMAIN}/api/reviews/${reviewId}`);
+        router.refresh();
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message) || "something went wrong";
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4 p-1">
@@ -29,6 +56,20 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
           {review.comment && (
             <p className="mt-3 text-muted">{review.comment}</p>
           )}
+          <div className="flex justify-end items-center">
+            {userId && userId === review.userId && (
+              <FaEdit
+                onClick={() => setOpen(true)}
+                className="text-green-600 text-xl cursor-pointer me-3"
+              />
+            )}
+            {userId && (userId === review.userId || isAdmin) && (
+              <FaTrash
+                onClick={() => ReviewDeleteHandler(review.id)}
+                className="text-red-600 text-xl cursor-pointer"
+              />
+            )}
+          </div>
         </div>
       ))}
     </div>

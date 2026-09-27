@@ -1,6 +1,9 @@
 import { getSingleProduct } from "@/apiCalls/productApiCalls";
+import AddReviewForm from "@/components/AddReviewForm";
 import ReviewList from "@/components/ReviewList";
 import { singleParamsProps, SingleProduct } from "@/utils/types";
+import { verifyTokenForPage } from "@/utils/verifyToken";
+import { cookies } from "next/headers";
 import Image from "next/image";
 
 const DetailsPage = async ({ params }: singleParamsProps) => {
@@ -14,6 +17,10 @@ const DetailsPage = async ({ params }: singleParamsProps) => {
       ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
         reviewCount
       : 0;
+
+  const cookieSotre = await cookies();
+  const token = cookieSotre.get("jwtToken")?.value || "";
+  const payload = verifyTokenForPage(token);
   return (
     <section className="w-full bg-background p-4 text-foreground">
       <div className="mx-auto flex max-w-5xl flex-col gap-8 md:flex-row">
@@ -54,8 +61,12 @@ const DetailsPage = async ({ params }: singleParamsProps) => {
       </div>
       <div className="mx-auto mt-5 max-w-3xl bg-card">
         <h2 className="mb-5 text-2xl font-bold p-2">Reviews ({reviewCount})</h2>
-
-        <ReviewList reviews={product.reviews} />
+        {payload ? (
+          <AddReviewForm productId={product.id} />
+        ) : (
+          <p className="p-2 text-red-500 font-medium">Login first to review</p>
+        )}
+        <ReviewList reviews={product.reviews} userId={payload?.id} isAdmin={payload?.isAdmin} />
       </div>
     </section>
   );
