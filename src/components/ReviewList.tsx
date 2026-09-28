@@ -8,6 +8,7 @@ import { FormEvent, useState } from "react";
 
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
+import UpdateReviewModal from "./UpdateReviewModal";
 
 type ReviewListProps = {
   reviews: ReviewWithUser[];
@@ -34,7 +35,7 @@ const ReviewList = ({ reviews, userId, isAdmin }: ReviewListProps) => {
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data?.message) || "something went wrong";
+        toast.error(error.response?.data?.message || "something went wrong");
         console.log(error);
       }
     }
@@ -70,6 +71,14 @@ const ReviewList = ({ reviews, userId, isAdmin }: ReviewListProps) => {
               />
             )}
           </div>
+          {open && (
+            <UpdateReviewModal
+              setOpen={setOpen}
+              reviewId={review.id}
+              comment={review.comment}
+              rating={review.rating}
+            />
+          )}
         </div>
       ))}
     </div>

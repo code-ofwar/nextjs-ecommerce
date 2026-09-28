@@ -17,6 +17,7 @@ const AddReviewForm = ({ productId }: AddReviewFormProps) => {
   const [rating, setRating] = useState(0);
 
   const formSubmitHandler = async (e: FormEvent) => {
+    e.preventDefault();
     if (rating === 0) {
       toast.error("Please choose a rating");
       return;
@@ -25,14 +26,13 @@ const AddReviewForm = ({ productId }: AddReviewFormProps) => {
       toast.error("Please write something");
       return;
     }
-    e.preventDefault();
     try {
       await axios.post(`${DOMAIN}/api/reviews`, { productId, comment, rating });
       router.refresh();
       setComment("");
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data?.message) || "something went wrong";
+        toast.error(error.response?.data?.message || "something went wrong");
         console.log(error);
         setComment("");
       }

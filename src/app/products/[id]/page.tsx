@@ -66,7 +66,11 @@ const DetailsPage = async ({ params }: singleParamsProps) => {
         ) : (
           <p className="p-2 text-red-500 font-medium">Login first to review</p>
         )}
-        <ReviewList reviews={product.reviews} userId={payload?.id} isAdmin={payload?.isAdmin} />
+        <ReviewList
+          reviews={product.reviews}
+          userId={payload?.id}
+          isAdmin={payload?.isAdmin}
+        />
       </div>
     </section>
   );
