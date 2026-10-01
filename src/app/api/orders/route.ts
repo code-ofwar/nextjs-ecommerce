@@ -64,6 +64,12 @@ export async function POST(request: NextRequest) {
     }
 
     const order = await db.transaction(async (tx) => {
+      for (const { item, product } of cartProducts) {
+        if (product.stock < item.quantity) {
+          throw new Error(`Not enough stock for product: ${product.name}`);
+        }
+      }
+
       const order = await tx.orm.public.Order.create({
         userId: user.id,
         totalPrice,
@@ -81,6 +87,10 @@ export async function POST(request: NextRequest) {
           productId: item.productId,
           quantity: item.quantity,
           price: product.price,
+        });
+
+        await tx.orm.public.Product.where({ id: product.id }).update({
+          stock: product.stock - item.quantity,
         });
       }
 

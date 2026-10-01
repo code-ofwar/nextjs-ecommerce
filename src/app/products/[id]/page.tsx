@@ -1,5 +1,6 @@
 import { getSingleProduct } from "@/apiCalls/productApiCalls";
 import AddReviewForm from "@/components/AddReviewForm";
+import AddToCartButton from "@/components/AddToCartButton";
 import ReviewList from "@/components/ReviewList";
 import { singleParamsProps, SingleProduct } from "@/utils/types";
 import { verifyTokenForPage } from "@/utils/verifyToken";
@@ -24,13 +25,10 @@ const DetailsPage = async ({ params }: singleParamsProps) => {
   return (
     <section className="w-full bg-background p-4 text-foreground">
       <div className="mx-auto flex max-w-5xl flex-col gap-8 md:flex-row">
-        <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-lg bg-border">
+        <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-lg bg-border">
           <Image
             src={
-              product.image?.startsWith("/")
-                ? product.image
-                : "/images/no-image.jpg"
-            }
+            `/images/${product.image}`}
             alt={product.name}
             fill
             className="object-cover"
@@ -54,9 +52,7 @@ const DetailsPage = async ({ params }: singleParamsProps) => {
 
           <p className="text-muted">Stock: {product.stock}</p>
 
-          <button className="w-fit rounded-lg bg-primary px-6 py-3 text-white hover:bg-primary-hover">
-            Add to cart
-          </button>
+          <AddToCartButton productId={product.id} />
         </div>
       </div>
       <div className="mx-auto mt-5 max-w-3xl bg-card">

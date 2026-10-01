@@ -1,12 +1,7 @@
 import { DOMAIN } from "@/utils/constants";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, {
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useState,
-} from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 
@@ -52,9 +47,7 @@ const UpdateReviewModal = ({
       setOpen(false);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(
-          error.response?.data?.message || "Something went wrong"
-        );
+        toast.error(error.response?.data?.message || "Something went wrong");
         console.log(error);
       }
     }
@@ -64,9 +57,7 @@ const UpdateReviewModal = ({
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/40 px-4">
       <div className="w-full max-w-xl rounded-xl border border-border bg-card p-6 shadow-xl">
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-foreground">
-            Edit Review
-          </h2>
+          <h2 className="text-xl font-semibold text-foreground">Edit Review</h2>
 
           <IoMdCloseCircleOutline
             onClick={() => setOpen(false)}

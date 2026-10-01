@@ -11,11 +11,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
     <div className="w-full max-w-xs overflow-hidden rounded-xl border border-border bg-card shadow-sm">
       <div className="relative aspect-square">
         <Image
-          src={
-            product.image?.startsWith("/")
-              ? product.image
-              : "/images/no-image.jpg"
-          }
+          src={`/images/${product.image}`}
           alt={product.name}
           fill
           className="object-cover"

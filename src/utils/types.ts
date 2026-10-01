@@ -1,5 +1,3 @@
-
-
 export type JWTPayload = {
   id: number;
   name: string;
@@ -9,7 +7,6 @@ export type JWTPayload = {
 export type singleParamsProps = {
   params: Promise<{ id: string }>;
 };
-
 
 // this type used by products page and detail page
 export type Product = {
@@ -24,7 +21,6 @@ export type Product = {
   createdAt: string;
   updatedAt: string;
 };
-
 
 export type Review = {
   id: number;
@@ -47,4 +43,16 @@ export type ReviewWithUser = Review & {
 
 export type SingleProduct = Product & {
   reviews: ReviewWithUser[];
+};
+
+type CartItem = {
+  quantity: number;
+  product: Product | null;
+};
+
+export type CartResponse = {
+  cart: {
+    id: number;
+    items: CartItem[];
+  };
 };
