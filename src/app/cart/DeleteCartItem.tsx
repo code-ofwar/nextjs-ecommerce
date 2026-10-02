@@ -17,7 +17,7 @@ const DeleteCartItem = ({ productId }: DeletCartItemProps) => {
       if (confirm("delete the cart, are you sure?")) {
         await axios.delete(`${DOMAIN}/api/cart`, { data: { productId } });
         router.refresh();
-        toast.success("Cart deleted succsessfuly");
+        toast.success("Cart deleted successfully");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

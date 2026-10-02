@@ -4,15 +4,12 @@ import DeleteCartItem from "./DeleteCartItem";
 import QuantityControls from "./QuantityControls";
 import Image from "next/image";
 import Link from "next/link";
+import { getSubtotal } from "@/utils/cartUtils";
 
 const CartPage = async () => {
   const cart: CartResponse = await getShppingCart();
 
-  const subtotal = cart.cart.items.reduce((total, item) => {
-    if (!item.product) return total;
-
-    return total + item.product.price * item.quantity;
-  }, 0);
+  const subtotal = getSubtotal(cart);
 
   return (
     <section className="mx-auto max-w-5xl px-5 py-7">
@@ -47,7 +44,7 @@ const CartPage = async () => {
 
                   <div className="min-w-0">
                     <Link
-                      href={`/products/${item.product.name}`}
+                      href={`/products/${item.product.id}`}
                       className="text-lg font-semibold transition hover:opacity-70"
                     >
                       {item.product.name}
