@@ -22,6 +22,10 @@ const Navbar = async () => {
             Home
           </Link>
 
+          <Link href="/orders" className="text-muted hover:text-foreground">
+            Orders
+          </Link>
+
           <Link href="/products" className="text-muted hover:text-foreground">
             Products
           </Link>

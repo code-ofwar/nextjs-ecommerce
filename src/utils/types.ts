@@ -56,3 +56,41 @@ export type CartResponse = {
     items: CartItem[];
   };
 };
+
+export enum OrderStatus {
+  PENDING = "PENDING",
+  PROCESSING = "PROCESSING",
+  SHIPPED = "SHIPPED",
+  DELIVERED = "DELIVERED",
+  CANCELLED = "CANCELLED",
+}
+export type orders = {
+  id: number;
+  userId: number;
+  status: OrderStatus;
+  totalPrice: number;
+  createdAt: Date;
+  fullName: string;
+  phone: string;
+  country: string;
+  city: string;
+  address: string;
+  postalCode: string;
+};
+
+export type OrderItemWithProduct = {
+  id: number;
+  orderId: number;
+  prodcutId: number;
+  quantity: number;
+  price: number;
+} & { product: Product };
+
+export type OrderWithItemsResponse = {
+  order: orders;
+  orderItems: OrderItemWithProduct[];
+};
+
+export type OrdersResponse = {
+  orders: OrderWithItemsResponse[];
+};

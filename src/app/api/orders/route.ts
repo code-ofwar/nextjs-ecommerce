@@ -127,21 +127,26 @@ export async function GET(request: NextRequest) {
 
     const orders = await db.orm.public.Order.where({ userId: user.id }).all();
 
-    const ordersWithItems = [];
+    const orderWithItems = [];
 
     for (const order of orders) {
       const orderItems = await db.orm.public.OrderItem.where({
         orderId: order.id,
-      }).all();
+      })
+        .include("product")
+        .all();
 
-      ordersWithItems.push({
+      orderWithItems.push({
         order,
 
         orderItems,
       });
     }
 
-    return NextResponse.json({ orders: ordersWithItems }, { status: 200 });
+    return NextResponse.json(
+      { orders: orderWithItems.reverse() },
+      { status: 200 },
+    );
   } catch (error) {
     return NextResponse.json(
       { message: "internal server error" },

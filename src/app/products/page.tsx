@@ -5,12 +5,12 @@ import { error } from "console";
 import React from "react";
 
 const ProductPage = async () => {
-  const produts: Product[] = await getProducts();
+  const products: Product[] = await getProducts();
   console.log(error)
   return (
     <section className="m-auto px-5">
       <div className="flex items-center justify-center flex-wrap gap-5">
-        {produts.map((item) => (
+        {products.map((item) => (
           <ProductItem product={item} key={item.id} />
         ))}
       </div>

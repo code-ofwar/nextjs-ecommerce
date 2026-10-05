@@ -30,6 +30,7 @@ const AddressForm = ({ cart }: AddressFormProps) => {
       await axios.post(`${DOMAIN}/api/orders`, formData);
       toast.success("Order placed successfully");
       router.push("/orders");
+      router.refresh()
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message);

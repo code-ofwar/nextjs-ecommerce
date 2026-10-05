@@ -5,6 +5,8 @@ import QuantityControls from "./QuantityControls";
 import Image from "next/image";
 import Link from "next/link";
 import { getSubtotal } from "@/utils/cartUtils";
+import AddProdcutMessage from "@/components/cart/page";
+import { DOMAIN } from "@/utils/constants";
 
 const CartPage = async () => {
   const cart: CartResponse = await getShppingCart();
@@ -15,14 +17,9 @@ const CartPage = async () => {
     <section className="mx-auto max-w-5xl px-5 py-7">
       <h1 className="mb-6 text-2xl font-bold">Shopping cart</h1>
       {cart.cart.items.length === 0 ? (
-        <div className="rounded-xl border border-border bg-card p-8 text-center shadow-sm">
-          <h2 className="text-xl font-semibold">Your cart is empty</h2>
-          <p className="mt-2 text-sm text-muted">
-            Add some products to your cart to continue shopping.
-          </p>
-        </div>
+        <AddProdcutMessage />
       ) : (
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+        <div className="flex flex-col gap-6 md:flex-row lg:items-start">
           {/* Products */}
           <div className="flex-1 space-y-4">
             {cart.cart.items.map((item) => {
@@ -84,6 +81,12 @@ const CartPage = async () => {
                   ${subtotal.toFixed(2)}
                 </span>
               </div>
+              <Link
+                href={`${DOMAIN}/checkout`}
+                className="mt-5 block w-full rounded-lg bg-green-500 px-4 py-3 text-center text-sm font-medium text-white transition hover:bg-green-600"
+              >
+                Checkout
+              </Link>
             </div>
           </div>
         </div>
