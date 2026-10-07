@@ -13,7 +13,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const orders = await db.orm.public.Order.all();
+    const orders = await db.orm.public.Order.orderBy((order) =>
+      order.createdAt.desc(),
+    ).all();
 
     const ordersWithItems = [];
 

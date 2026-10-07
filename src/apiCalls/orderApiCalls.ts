@@ -16,3 +16,20 @@ export async function getOrders() {
   const data = await response.json();
   return data;
 }
+
+// only admin
+export async function getAllOrders() {
+  const cookieStore = await cookies();
+
+  const response = await fetch(`${DOMAIN}/api/admin/orders`, {
+    cache: "no-cache",
+    headers: { Cookie: cookieStore.toString() },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch orders");
+  }
+
+  const data = await response.json();
+  return data;
+}

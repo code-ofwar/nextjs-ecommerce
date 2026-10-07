@@ -36,6 +36,7 @@ const UpdateProduct = ({ product, setOpen }: UpdateProductProps) => {
         slug,
         categoryId,
       });
+      toast.success("Product updated succsessfully");
       setOpen(false);
       router.refresh();
     } catch (error) {

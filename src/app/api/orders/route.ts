@@ -125,7 +125,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const orders = await db.orm.public.Order.where({ userId: user.id }).all();
+    const orders = await db.orm.public.Order.where({ userId: user.id })
+      .orderBy((order) => order.createdAt.desc())
+      .all();
 
     const orderWithItems = [];
 
@@ -144,7 +146,7 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { orders: orderWithItems.reverse() },
+      { orders: orderWithItems },
       { status: 200 },
     );
   } catch (error) {

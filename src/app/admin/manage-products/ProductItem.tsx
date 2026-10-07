@@ -4,6 +4,8 @@ import { Product } from "@/utils/types";
 import React, { useState } from "react";
 import DeleteProdcut from "./DeleteProdcut";
 import UpdateProduct from "./UpdateProduct";
+import Link from "next/link";
+import { DOMAIN } from "@/utils/constants";
 
 type ProductItemProps = {
   product: Product;
@@ -48,6 +50,12 @@ const ProductItem = ({ product }: ProductItemProps) => {
           </button>
 
           <DeleteProdcut productId={product.id} />
+          <Link
+            href={`${DOMAIN}/products/${product.id}`}
+            className="rounded-md border border-border bg-foreground px-4 py-2 text-sm font-medium text-white transition-colors hover:opacity-80"
+          >
+            Manage Reviews(admin)
+          </Link>
         </div>
         {open && <UpdateProduct setOpen={setOpen} product={product} />}
       </div>
