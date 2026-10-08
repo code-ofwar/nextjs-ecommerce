@@ -8,7 +8,17 @@ export type singleParamsProps = {
   params: Promise<{ id: string }>;
 };
 
+export type singleSlugParamsProps = {
+  params: Promise<{ slug: string }>;
+};
+
 // this type used by products page and detail page
+export type Category = {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 export type Product = {
   id: number;
   name: string;
@@ -18,6 +28,7 @@ export type Product = {
   stock: number;
   image: string;
   categoryId: number;
+  category: Category
   createdAt: string;
   updatedAt: string;
 };

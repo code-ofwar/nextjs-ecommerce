@@ -1,38 +1,9 @@
 import { db } from "@/prisma/db";
 import { updateProductDto } from "@/utils/dtos";
-import { singleParamsProps } from "@/utils/types";
+import { singleParamsProps, singleSlugParamsProps } from "@/utils/types";
 import { updateProductSchema } from "@/utils/validationSchemas";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
-
-export async function GET(request: NextRequest, { params }: singleParamsProps) {
-  try {
-    const { id } = await params;
-    const parseId = parseInt(id);
-
-    const product = await db.orm.public.Product.where({ id: parseId })
-      .include("reviews", (review) =>
-        review.include("user", (user) => user.select("id", "name")),
-      )
-      .first();
-
-    if (!product) {
-      return NextResponse.json(
-        { message: "product not found" },
-        { status: 404 },
-      );
-    }
-
-    return NextResponse.json({ product }, { status: 200 });
-  } catch (error) {
-    console.error(error);
-
-    return NextResponse.json(
-      { message: "internal server error" },
-      { status: 500 },
-    );
-  }
-}
 
 export async function PUT(request: NextRequest, { params }: singleParamsProps) {
   try {

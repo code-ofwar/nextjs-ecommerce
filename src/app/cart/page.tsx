@@ -41,7 +41,7 @@ const CartPage = async () => {
 
                   <div className="min-w-0">
                     <Link
-                      href={`/products/${item.product.id}`}
+                      href={`/products/${item.product.slug}`}
                       className="text-lg font-semibold transition hover:opacity-70"
                     >
                       {item.product.name}

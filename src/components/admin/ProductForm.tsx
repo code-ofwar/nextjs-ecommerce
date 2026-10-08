@@ -1,13 +1,24 @@
 "use client";
 
+import { getCategories } from "@/apiCalls/categoryApiCalls";
 import { DOMAIN } from "@/utils/constants";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const ProductForm = () => {
   const router = useRouter();
+  const [categories, setCategories] = useState<{ id: number; name: string }[]>(
+    [],
+  );
+
+  useEffect(() => {
+    getCategories()
+      .then((data) => setCategories(data))
+      .catch(() => toast.error("Failed to load categories"));
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     slug: "",
@@ -17,6 +28,14 @@ const ProductForm = () => {
     image: "",
     categoryId: "",
   });
+  const [slugEdited, setSlugEdited] = useState(false);
+
+  const generateSlug = (value: string) =>
+    value
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
 
   const formSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
@@ -37,6 +56,7 @@ const ProductForm = () => {
         image: "",
         categoryId: "",
       });
+      setSlugEdited(false);
       router.refresh();
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -52,31 +72,51 @@ const ProductForm = () => {
         type="text"
         placeholder="Name"
         value={formData.name}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, name: e.target.value }))
-        }
+        onChange={(e) => {
+          const name = e.target.value;
+
+          setFormData((prev) => ({
+            ...prev,
+            name,
+            slug: slugEdited ? prev.slug : generateSlug(name),
+          }));
+        }}
         className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
       />
 
       <input
         type="text"
-        placeholder="Slug"
+        placeholder="Slug (auto-generated, editable)"
         value={formData.slug}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, slug: e.target.value }))
-        }
+        onChange={(e) => {
+          setSlugEdited(true);
+          setFormData((prev) => ({
+            ...prev,
+            slug: e.target.value,
+          }));
+        }}
         className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
       />
 
-      <textarea
-        placeholder="Description"
-        rows={5}
-        value={formData.description}
+      <select
+        value={formData.categoryId}
         onChange={(e) =>
-          setFormData((prev) => ({ ...prev, description: e.target.value }))
+          setFormData((prev) => ({
+            ...prev,
+            categoryId: e.target.value,
+          }))
         }
-        className="w-full resize-none rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
-      />
+        required
+        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+      >
+        <option value="">Select category</option>
+
+        {categories.map((category) => (
+          <option key={category.id} value={category.id}>
+            {category.name}
+          </option>
+        ))}
+      </select>
 
       <input
         type="number"
@@ -104,25 +144,22 @@ const ProductForm = () => {
         className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
       />
 
+      <textarea
+        placeholder="Description"
+        rows={5}
+        value={formData.description}
+        onChange={(e) =>
+          setFormData((prev) => ({ ...prev, description: e.target.value }))
+        }
+        className="w-full resize-none rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+      />
+
       <input
         type="text"
         placeholder="Image"
         value={formData.image}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, image: e.target.value }))
-        }
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
-      />
-
-      <input
-        type="text"
-        placeholder="Category id"
-        value={formData.categoryId}
-        onChange={(e) =>
-          setFormData((prev) => ({
-            ...prev,
-            categoryId: e.target.value,
-          }))
         }
         className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
       />
