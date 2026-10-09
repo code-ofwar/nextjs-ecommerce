@@ -15,7 +15,7 @@ const CartPage = async () => {
 
   return (
     <section className="mx-auto max-w-5xl px-5 py-7">
-      <h1 className="mb-6 text-2xl font-bold">Shopping cart</h1>
+      <h1 className="mb-6 text-2xl font-bold">Shopping Cart</h1>
       {cart.cart.items.length === 0 ? (
         <AddProdcutMessage />
       ) : (

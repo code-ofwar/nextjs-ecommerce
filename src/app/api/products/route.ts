@@ -4,13 +4,36 @@ import { createProductSchema } from "@/utils/validationSchemas";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const products = await db.orm.public.Product.include("category").all();
-    return NextResponse.json( products , { status: 200 });
+    const categorySlug = request.nextUrl.searchParams.get("category");
+
+    let products;
+
+    if (categorySlug) {
+      const category = await db.orm.public.Category.where({
+        slug: categorySlug,
+      }).first();
+
+      if (!category) {
+        return NextResponse.json([], { status: 200 });
+      }
+
+      products = await db.orm.public.Product.where({
+        categoryId: category.id,
+      })
+        .include("category")
+        .all();
+    } else {
+      products = await db.orm.public.Product.include("category").all();
+    }
+
+    return NextResponse.json(products, { status: 200 });
   } catch (error) {
+    console.error(error);
+
     return NextResponse.json(
-      { message: "internal server error" },
+      { message: "Internal server error" },
       { status: 500 },
     );
   }
