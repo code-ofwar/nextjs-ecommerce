@@ -23,54 +23,64 @@ const DetailsPage = async ({ params }: singleSlugParamsProps) => {
   const token = cookieSotre.get("jwtToken")?.value || "";
   const payload = verifyTokenForPage(token);
   return (
-    <section className="w-full bg-background p-4 text-foreground">
-      <div className="mx-auto flex max-w-5xl flex-col gap-8 md:flex-row">
-        <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-lg bg-border">
+    <main className="w-full bg-background px-4 py-6 text-foreground sm:px-6 sm:py-8">
+      <section className="mx-auto flex max-w-6xl flex-col gap-5 md:flex-row md:items-start md:gap-8">
+        <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl bg-border md:mx-0 md:flex-1">
           <Image
             src={`/images/${product.image}`}
             alt={product.name}
             fill
+            sizes="(max-width: 767px) 100vw, (max-width: 1152px) 50vw, 448px"
             className="object-cover"
           />
         </div>
 
-        <div className="flex flex-1 flex-col gap-4 rounded-lg bg-card p-6">
-          <span className="w-fit shrink-0 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+        <div className="flex w-full flex-col gap-4 rounded-2xl border border-border bg-card p-4 sm:p-6 md:flex-1">
+          <span className="w-fit rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
             {product.category.name}
           </span>
-          <h1 className="text-3xl font-bold">{product.name}</h1>
 
-          <div className="flex items-center gap-2">
+          <h1 className="text-2xl font-bold md:text-3xl">{product.name}</h1>
+
+          <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base">
             <span className="text-yellow-500">★</span>
-
             <span className="font-semibold">{averageRating.toFixed(1)}</span>
-
             <span className="text-muted">({reviewCount} reviews)</span>
           </div>
 
-          <p className="text-muted">{product.description}</p>
+          <p className="text-sm leading-6 text-muted sm:text-base">
+            {product.description || "No description available."}
+          </p>
 
-          <p className="text-2xl font-bold">${product.price}</p>
+          <p className="text-2xl font-bold text-primary">${product.price}</p>
 
-          <p className="text-muted">Stock: {product.stock}</p>
+          <p className="text-sm text-muted">Stock: {product.stock}</p>
 
           <AddToCartButton productId={product.id} />
         </div>
-      </div>
-      <div className="mx-auto mt-5 max-w-3xl bg-card">
-        <h2 className="mb-5 text-2xl font-bold p-2">Reviews ({reviewCount})</h2>
+      </section>
+
+      {/* Reviews */}
+      <section className="mx-auto mt-8 max-w-4xl rounded-2xl border border-border bg-card p-4 sm:mt-10 sm:p-6">
+        <h2 className="mb-5 text-xl font-bold sm:text-2xl">
+          Reviews ({reviewCount})
+        </h2>
+
         {payload ? (
           <AddReviewForm productId={product.id} />
         ) : (
-          <p className="p-2 text-red-500 font-medium">Login first to review</p>
+          <p className="mb-5 rounded-lg bg-background p-3 text-sm font-medium text-red-500 sm:text-base">
+            Login first to review
+          </p>
         )}
+
         <ReviewList
           reviews={product.reviews}
           userId={payload?.id}
           isAdmin={payload?.isAdmin}
         />
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 

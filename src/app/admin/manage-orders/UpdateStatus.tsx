@@ -41,7 +41,7 @@ const UpdateStatus = ({ orderId, currentStatus }: UpdateStatusProps) => {
   };
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
       <label htmlFor={`status-${orderId}`} className="text-sm font-medium">
         Change status:
       </label>
@@ -51,7 +51,7 @@ const UpdateStatus = ({ orderId, currentStatus }: UpdateStatusProps) => {
         value={status}
         disabled={loading}
         onChange={(e) => updateStatusHandler(e.target.value as OrderStatus)}
-        className="w-32 rounded-md border border-border bg-card px-3 py-2 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full max-w-full rounded-md border border-border bg-card px-3 py-2 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:w-40"
       >
         {Object.values(OrderStatus).map((status) => (
           <option key={status} value={status}>

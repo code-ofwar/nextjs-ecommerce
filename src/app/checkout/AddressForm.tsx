@@ -30,7 +30,7 @@ const AddressForm = ({ cart }: AddressFormProps) => {
       await axios.post(`${DOMAIN}/api/orders`, formData);
       toast.success("Order placed successfully");
       router.push("/orders");
-      router.refresh()
+      router.refresh();
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message);
@@ -40,8 +40,10 @@ const AddressForm = ({ cart }: AddressFormProps) => {
   };
 
   return (
-    <div className="w-full rounded-xl border border-border bg-card p-6 shadow-sm max-w-3xl m-auto">
-      <h2 className="mb-6 text-xl font-semibold">Shipping Address</h2>
+    <div className="mx-auto w-full max-w-3xl rounded-xl border border-border bg-card p-4 shadow-sm sm:p-6">
+      <h2 className="mb-4 text-lg font-semibold sm:mb-6 sm:text-xl">
+        Shipping Address
+      </h2>
 
       <form onSubmit={formSubmitHandler} className="space-y-5">
         <div className="flex flex-col gap-2">

@@ -14,18 +14,21 @@ const ProductPage = async ({ searchParams }: ProductPageProps) => {
   const categories: Category[] = await getCategories();
 
   return (
-    <section className="px-5 py-7">
-      <div className="max-w-5xl m-auto mb-4 px-5">
-        <h1 className="text-2xl font-bold text-foreground">
+    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-5 sm:py-7">
+      {/* Header and Categories */}
+      <section className="mx-auto mb-8 max-w-5xl">
+        <h1 className="text-xl font-bold text-foreground sm:text-2xl">
           Our Products
         </h1>
 
-        <p className="mb-6 text-sm text-muted">Browse our collection</p>
+        <p className="mb-5 mt-2 text-sm text-muted sm:mb-6">
+          Browse our collection
+        </p>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           <Link
             href="/products"
-            className={`rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
+            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors sm:px-5 sm:py-2.5 ${
               !category
                 ? "bg-primary text-white"
                 : "bg-border text-foreground hover:opacity-80"
@@ -38,7 +41,7 @@ const ProductPage = async ({ searchParams }: ProductPageProps) => {
             <Link
               key={item.id}
               href={`/products?category=${encodeURIComponent(item.slug)}`}
-              className={`rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
+              className={`rounded-full  px-4 py-2 text-sm font-medium transition-colors sm:px-5 sm:py-2.5 ${
                 category === item.slug
                   ? "bg-primary text-white"
                   : "bg-border text-foreground hover:opacity-80"
@@ -48,13 +51,15 @@ const ProductPage = async ({ searchParams }: ProductPageProps) => {
             </Link>
           ))}
         </div>
-      </div>
-      <div className="flex items-center justify-center flex-wrap gap-5">
-        {products.map((item) => (
+      </section>
+
+      {/* Products Grid */}
+      <section className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {products.map((item: Product) => (
           <ProductItem product={item} key={item.id} />
         ))}
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 

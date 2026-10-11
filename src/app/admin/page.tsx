@@ -3,11 +3,12 @@ import React from "react";
 
 const AdminPage = () => {
   return (
-    <div className="mx-auto max-w-3xl px-5">
-      <div className="shadow p-4 bg-purple-200 w-full">
-        <h2 className="text-xl lg:text-2xl font-semibold text-muted  mb-4">
+    <div className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-5 sm:py-8">
+      <div className="w-full rounded-xl border border-border bg-card p-4 shadow-sm sm:p-6">
+        <h2 className="mb-4 text-xl font-semibold text-foreground sm:text-2xl">
           Add new product
         </h2>
+
         <ProductForm />
       </div>
     </div>

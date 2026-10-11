@@ -7,9 +7,12 @@ const ManageProductsPage = async () => {
   const products: Product[] = await getProducts();
 
   return (
-    <section className="mx-auto max-w-5xl px-5 py-8">
-      <h1 className="mb-6 text-2xl font-bold">Manage products</h1>
-      <div className="space-y-6 max-w-3xl m-auto">
+    <section className="mx-auto max-w-5xl px-4 py-6 sm:px-5 sm:py-8">
+      <h1 className="mb-5 text-xl font-bold sm:mb-6 sm:text-2xl">
+        Manage products
+      </h1>
+
+      <div className="mx-auto max-w-3xl space-y-4 sm:space-y-6">
         {products.map((product) => (
           <ProductItem product={product} key={product.id} />
         ))}

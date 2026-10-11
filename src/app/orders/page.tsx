@@ -6,20 +6,20 @@ const OrdersPage = async () => {
   const orders: OrdersResponse = await getOrders();
 
   return (
-    <section className="mx-auto max-w-5xl px-5 py-8">
-      <h1 className="mb-6 text-2xl font-bold">My Orders</h1>
+    <main className="mx-auto max-w-5xl px-4 py-6 sm:px-5 sm:py-8">
+      <h1 className="mb-6 text-xl font-bold sm:text-2xl">My Orders</h1>
 
-      <div className="space-y-6 max-w-4xl m-auto">
+      <div className="mx-auto max-w-4xl space-y-4 sm:space-y-6">
         {orders.orders.map((order) => (
           <div
             key={order.order.id}
-            className="rounded-lg border border-border bg-card p-5"
+            className="rounded-xl border border-border bg-card p-3 mb-8 sm:p-5"
           >
             <SingleOrder order={order} />
           </div>
         ))}
       </div>
-    </section>
+    </main>
   );
 };
 

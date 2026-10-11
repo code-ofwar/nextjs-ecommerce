@@ -1,4 +1,5 @@
 import { OrdersResponse, OrderStatus } from "@/utils/types";
+import Image from "next/image";
 
 type SingleOrderProps = {
   order: OrdersResponse["orders"][number];
@@ -15,11 +16,14 @@ const SingleOrder = ({ order }: SingleOrderProps) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      {/* Order Header */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="font-semibold">Order #{order.order.id}</h2>
+          <h2 className="text-base font-semibold sm:text-lg">
+            Order #{order.order.id}
+          </h2>
 
-          <p className="mt-1 text-sm text-muted">
+          <p className="mt-1 text-xs text-muted sm:text-sm">
             {new Date(order.order.createdAt).toLocaleString("en-US", {
               year: "numeric",
               month: "short",
@@ -30,37 +34,51 @@ const SingleOrder = ({ order }: SingleOrderProps) => {
           </p>
         </div>
 
-        <div className="text-right">
+        <div className="flex flex-wrap items-center justify-between gap-3 sm:flex-col sm:items-end">
           <span
-            className={`inline-block rounded-full px-3 py-1 text-sm font-medium ${
+            className={`inline-block rounded-full px-3 py-1 text-xs font-medium sm:text-sm ${
               statusColor[order.order.status]
             }`}
           >
             {order.order.status}
           </span>
 
-          <p className="mt-2 font-semibold">
+          <p className="text-base font-semibold sm:text-lg">
             ${order.order.totalPrice.toFixed(2)}
           </p>
         </div>
       </div>
 
-      <div className="mt-5 border-t border-border pt-4">
+      {/* Order Items */}
+      <div className="mt-4 border-t border-border pt-3 sm:mt-5 sm:pt-4">
         {order.orderItems.map((item) => (
-          <div key={item.id} className="flex items-center gap-4 py-3">
-            <img
-              src={`/images/${item.product.image}`}
-              alt={item.product.name}
-              className="h-16 w-16 rounded-md object-cover"
-            />
-
-            <div className="flex-1">
-              <p className="font-medium">{item.product.name}</p>
-
-              <p className="text-sm text-muted">Quantity: {item.quantity}</p>
+          <div
+            key={item.id}
+            className="flex items-center gap-3 border-b border-border py-3 last:border-b-0 sm:gap-4"
+          >
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-md bg-border sm:h-16 sm:w-16">
+              <Image
+                src={`/images/${item.product.image}`}
+                alt={item.product.name}
+                fill
+                sizes="64px"
+                className="object-cover"
+              />
             </div>
 
-            <p className="font-medium">${item.price.toFixed(2)}</p>
+            <div className="min-w-0 flex-1">
+              <p className="break-words text-sm font-medium sm:text-base">
+                {item.product.name}
+              </p>
+
+              <p className="mt-1 text-xs text-muted sm:text-sm">
+                Quantity: {item.quantity}
+              </p>
+            </div>
+
+            <p className="shrink-0 text-sm font-medium sm:text-base">
+              ${item.price.toFixed(2)}
+            </p>
           </div>
         ))}
       </div>

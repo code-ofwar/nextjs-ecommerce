@@ -67,7 +67,7 @@ const ProductForm = () => {
   };
 
   return (
-    <form onSubmit={formSubmitHandler} className="space-y-4">
+    <form onSubmit={formSubmitHandler} className="space-y-3 sm:space-y-4">
       <input
         type="text"
         placeholder="Name"
@@ -81,7 +81,7 @@ const ProductForm = () => {
             slug: slugEdited ? prev.slug : generateSlug(name),
           }));
         }}
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+        className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
       />
 
       <input
@@ -95,7 +95,7 @@ const ProductForm = () => {
             slug: e.target.value,
           }));
         }}
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+        className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
       />
 
       <select
@@ -107,7 +107,7 @@ const ProductForm = () => {
           }))
         }
         required
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+        className="w-full min-w-0 rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
       >
         <option value="">Select category</option>
 
@@ -128,7 +128,7 @@ const ProductForm = () => {
             price: e.target.value,
           }))
         }
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+        className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
       />
 
       <input
@@ -141,7 +141,7 @@ const ProductForm = () => {
             stock: e.target.value,
           }))
         }
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+        className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
       />
 
       <textarea
@@ -149,9 +149,12 @@ const ProductForm = () => {
         rows={5}
         value={formData.description}
         onChange={(e) =>
-          setFormData((prev) => ({ ...prev, description: e.target.value }))
+          setFormData((prev) => ({
+            ...prev,
+            description: e.target.value,
+          }))
         }
-        className="w-full resize-none rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+        className="w-full resize-y rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
       />
 
       <input
@@ -159,14 +162,17 @@ const ProductForm = () => {
         placeholder="Image"
         value={formData.image}
         onChange={(e) =>
-          setFormData((prev) => ({ ...prev, image: e.target.value }))
+          setFormData((prev) => ({
+            ...prev,
+            image: e.target.value,
+          }))
         }
-        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+        className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
       />
 
       <button
         type="submit"
-        className="w-full rounded-md bg-purple-600 px-4 py-2.5 font-semibold text-white transition hover:bg-purple-700 active:scale-[0.98]"
+        className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-hover active:scale-[0.98] sm:text-base"
       >
         Create new product
       </button>

@@ -51,28 +51,31 @@ const RegisterForm = () => {
         placeholder="Enter your name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="mb-4 border-border rounded p-2 text-xl"
+        className="mb-3 w-full rounded border border-border bg-background p-2 text-sm text-foreground outline-none focus:border-primary sm:mb-4 sm:text-base"
       />
+
       <input
         type="email"
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="mb-4 border-border rounded p-2 text-xl"
+        className="mb-3 w-full rounded border border-border bg-background p-2 text-sm text-foreground outline-none focus:border-primary sm:mb-4 sm:text-base"
       />
+
       <input
         type="password"
         placeholder="Enter your password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="mb-4 border-border rounded p-2 text-xl"
+        className="mb-3 w-full rounded border border-border bg-background p-2 text-sm text-foreground outline-none focus:border-primary sm:mb-4 sm:text-base"
       />
+
       <button
         type="submit"
         disabled={loading}
-        className="text-2xl p-2 bg-primary hover:bg-primary-hover text-foreground rounded-lg font-bold"
+        className="w-full rounded-lg bg-primary p-2 text-base font-bold text-foreground transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60 sm:text-lg"
       >
-        {loading ? "loading..." : "Register"}
+        {loading ? "Loading..." : "Register"}
       </button>
     </form>
   );

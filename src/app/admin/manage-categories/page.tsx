@@ -8,33 +8,37 @@ const CategoriesPage = async () => {
   const categories = await getCategories();
 
   return (
-    <section className="mx-auto max-w-5xl px-5 py-7">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-foreground">Categories</h1>
+    <section className="mx-auto max-w-5xl px-4 py-6 sm:px-5 sm:py-8">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
+          Categories
+        </h1>
 
         <AddCategory />
       </div>
 
-      <div className="mt-15 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
         {categories.map(
           (category: { id: number; name: string; slug: string }) => (
             <div
               key={category.id}
-              className="rounded-3xl border border-border bg-card p-5 shadow-sm transition duration-300 hover:shadow-lg"
+              className="rounded-2xl border border-border bg-card p-4 shadow-sm transition duration-300 hover:shadow-lg sm:rounded-3xl sm:p-5"
             >
-              <div className="mb-5 flex items-center justify-center rounded-2xl bg-primary/10 p-5">
+              <div className="mb-4 flex items-center justify-center rounded-2xl bg-primary/10 p-4 sm:mb-5 sm:p-5">
                 <span className="text-2xl font-bold text-primary">
                   {category.name.charAt(0).toUpperCase()}
                 </span>
               </div>
 
-              <h2 className="mb-1 text-lg font-bold text-foreground">
-                name: {category.name}
+              <h2 className="mb-1 break-words text-base font-bold text-foreground sm:text-lg">
+                Name: {category.name}
               </h2>
 
-              <p className="text-sm text-muted">slug: {category.slug}</p>
+              <p className="break-all text-sm text-muted">
+                Slug: {category.slug}
+              </p>
 
-              <div className="mt-5 flex justify-end gap-3">
+              <div className="mt-4 flex flex-wrap items-center justify-end gap-2 sm:mt-5 sm:gap-3">
                 <UpdateCategory
                   categoryId={category.id}
                   categoryName={category.name}

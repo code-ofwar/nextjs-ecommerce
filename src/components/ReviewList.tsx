@@ -42,35 +42,47 @@ const ReviewList = ({ reviews, userId, isAdmin }: ReviewListProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-1">
+    <div className="flex flex-col gap-3 p-1 sm:gap-4 sm:p-2">
       {reviews.map((review) => (
         <div
           key={review.id}
-          className="rounded-lg border border-border bg-card p-5"
+          className="rounded-xl border border-border bg-card p-3 sm:p-5"
         >
-          <div className="flex items-center justify-between">
-            <h3 className="font-semibold">{review.user.name}</h3>
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <h3 className="min-w-0 break-words text-sm font-semibold sm:text-base">
+              {review.user.name}
+            </h3>
 
-            <span className="text-yellow-500">{"★".repeat(review.rating)}</span>
+            <span
+              className="shrink-0 text-sm text-yellow-500 sm:text-base"
+              aria-label={`Rating: ${review.rating} out of 5`}
+            >
+              {"★".repeat(review.rating)}
+            </span>
           </div>
 
           {review.comment && (
-            <p className="mt-3 text-muted">{review.comment}</p>
+            <p className="mt-3 break-words text-sm leading-6 text-muted sm:text-base">
+              {review.comment}
+            </p>
           )}
-          <div className="flex justify-end items-center">
+
+          <div className="mt-3 flex items-center justify-end gap-4">
             {userId && userId === review.userId && (
               <FaEdit
                 onClick={() => setOpen(true)}
-                className="text-green-600 text-xl cursor-pointer me-3"
+                className="cursor-pointer text-lg text-green-600 sm:text-xl"
               />
             )}
+
             {userId && (userId === review.userId || isAdmin) && (
               <FaTrash
                 onClick={() => ReviewDeleteHandler(review.id)}
-                className="text-red-600 text-xl cursor-pointer"
+                className="cursor-pointer text-lg text-red-600 sm:text-xl"
               />
             )}
           </div>
+
           {open && (
             <UpdateReviewModal
               setOpen={setOpen}

@@ -48,111 +48,117 @@ const UpdateProduct = ({ product, setOpen }: UpdateProductProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="flex max-h-[90vh] w-full max-w-xl flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xl">
-        <div className="flex shrink-0 items-center justify-between border-b border-border p-5">
-          <h2 className="text-xl font-semibold text-foreground">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50 p-3 sm:p-4">
+      <div className="flex max-h-[90dvh] w-full max-w-xl flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xl">
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-border p-4 sm:p-5">
+          <h2 className="text-lg font-semibold text-foreground sm:text-xl">
             Edit Product
           </h2>
 
           <IoMdCloseCircleOutline
             onClick={() => setOpen(false)}
-            className="cursor-pointer text-2xl text-muted transition-colors hover:text-foreground"
+            className="shrink-0 cursor-pointer text-2xl text-muted transition-colors hover:text-foreground"
           />
         </div>
 
         <form
           onSubmit={formSubmitHandler}
-          className="flex flex-col gap-4 overflow-y-auto p-5"
+          className="flex min-h-0 flex-col gap-3 overflow-y-auto p-4 sm:gap-4 sm:p-5"
         >
           <div>
             <label className="mb-2 block text-sm font-medium text-foreground">
-              name
+              Name
             </label>
             <input
               type="text"
-              placeholder="name"
+              placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
             />
           </div>
+
           <div>
             <label className="mb-2 block text-sm font-medium text-foreground">
-              description
+              Description
             </label>
             <textarea
-              rows={7}
-              placeholder="description"
+              rows={5}
+              placeholder="Description"
               value={description}
               onChange={(e) => setdescription(e.target.value)}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full resize-y rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
             />
           </div>
+
           <div>
             <label className="mb-2 block text-sm font-medium text-foreground">
-              price
+              Price
             </label>
             <input
               type="number"
-              placeholder="price"
+              placeholder="Price"
               value={price}
               onChange={(e) => setPrice(Number(e.target.value))}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
             />
           </div>
+
           <div>
             <label className="mb-2 block text-sm font-medium text-foreground">
-              stock
+              Stock
             </label>
             <input
               type="number"
-              placeholder="stock"
+              placeholder="Stock"
               value={stock}
               onChange={(e) => setStock(Number(e.target.value))}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
             />
           </div>
+
           <div>
             <label className="mb-2 block text-sm font-medium text-foreground">
-              image
+              Image
             </label>
             <input
               type="text"
-              placeholder="image"
+              placeholder="Image"
               value={image}
               onChange={(e) => setImage(e.target.value)}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
             />
           </div>
+
           <div>
             <label className="mb-2 block text-sm font-medium text-foreground">
-              slug
+              Slug
             </label>
             <input
               type="text"
-              placeholder="slug"
+              placeholder="Slug"
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
             />
           </div>
+
           <div>
             <label className="mb-2 block text-sm font-medium text-foreground">
-              categoryId
+              Category ID
             </label>
             <input
               type="number"
-              placeholder="categoryId"
+              placeholder="Category ID"
               value={categoryId}
               onChange={(e) => setCategoryId(Number(e.target.value))}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary sm:text-base"
             />
           </div>
 
           <button
             type="submit"
-            className="sticky bottom-0 w-full rounded-lg bg-primary py-2.5 font-medium text-white transition-colors hover:bg-primary-hover"
+            className="w-full shrink-0 rounded-lg bg-primary py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary-hover sm:text-base"
           >
             Update Product
           </button>
