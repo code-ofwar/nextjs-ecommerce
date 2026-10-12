@@ -1,5 +1,15 @@
 import ProductForm from "@/components/admin/ProductForm";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create product",
+  description: "Create products in KSP SHOP.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const AdminPage = () => {
   return (

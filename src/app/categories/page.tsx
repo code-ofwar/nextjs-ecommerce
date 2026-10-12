@@ -1,5 +1,6 @@
 import { getCategories } from "@/apiCalls/categoryApiCalls";
 import { Category } from "@/utils/types";
+import { Metadata } from "next";
 import Link from "next/link";
 import {
   FaMobileAlt,
@@ -8,6 +9,12 @@ import {
   FaRegKeyboard,
   FaTag,
 } from "react-icons/fa";
+
+export const metadata: Metadata = {
+  title: "Categories",
+  description:
+    "Explore product categories at KSP SHOP and find the products you need.",
+};
 
 const categoryIcons: Record<string, React.ReactNode> = {
   phones: <FaMobileAlt size={32} />,

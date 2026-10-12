@@ -7,6 +7,16 @@ import Link from "next/link";
 import { getSubtotal } from "@/utils/cartUtils";
 import AddProdcutMessage from "@/components/cart/page";
 import { DOMAIN } from "@/utils/constants";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Shopping Cart",
+  description: "Review the products in your shopping cart.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const CartPage = async () => {
   const cart: CartResponse = await getShppingCart();

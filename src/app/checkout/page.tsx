@@ -2,6 +2,16 @@ import { getShppingCart } from "@/apiCalls/cartApiCalls";
 import AddressForm from "./AddressForm";
 import { CartResponse } from "@/utils/types";
 import AddProdcutMessage from "@/components/cart/page";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Checkout",
+  description: "Complete your purchase at KSP SHOP.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const CheckoutPage = async () => {
   const cart: CartResponse = await getShppingCart();

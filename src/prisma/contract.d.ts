@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'0a6c4518d7b60578f279deda0af66de04aaf72603b09078ce3bca2a477d5216a'>;
+  StorageHashBase<'f42d953edde76eff19f4bd902061e76ce493553e4e60dbd809435488ee74e588'>;
 export type ExecutionHash =
   ExecutionHashBase<'bf78ae55a5d6ba9e285c988145022c29795befd9c70f715fab06be728f97e910'>;
 export type ProfileHash =
@@ -289,7 +289,7 @@ export type FieldOutputTypes = {
       readonly description: CodecTypes['pg/text@1']['output'] | null;
       readonly price: CodecTypes['pg/float8@1']['output'];
       readonly stock: CodecTypes['pg/int4@1']['output'];
-      readonly image: CodecTypes['pg/text@1']['output'] | null;
+      readonly image: CodecTypes['pg/text@1']['output'];
       readonly categoryId: CodecTypes['pg/int4@1']['output'];
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -363,7 +363,7 @@ export type FieldInputTypes = {
       readonly description: CodecTypes['pg/text@1']['input'] | null;
       readonly price: CodecTypes['pg/float8@1']['input'];
       readonly stock: CodecTypes['pg/int4@1']['input'];
-      readonly image: CodecTypes['pg/text@1']['input'] | null;
+      readonly image: CodecTypes['pg/text@1']['input'];
       readonly categoryId: CodecTypes['pg/int4@1']['input'];
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
@@ -435,7 +435,7 @@ export type StorageColumnTypes = {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly description: CodecTypes['pg/text@1']['output'] | null;
       readonly id: CodecTypes['pg/int4@1']['output'];
-      readonly image: CodecTypes['pg/text@1']['output'] | null;
+      readonly image: CodecTypes['pg/text@1']['output'];
       readonly name: CodecTypes['pg/text@1']['output'];
       readonly price: CodecTypes['pg/float8@1']['output'];
       readonly slug: CodecTypes['pg/text@1']['output'];
@@ -509,7 +509,7 @@ export type StorageColumnInputTypes = {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly description: CodecTypes['pg/text@1']['input'] | null;
       readonly id: CodecTypes['pg/int4@1']['input'];
-      readonly image: CodecTypes['pg/text@1']['input'] | null;
+      readonly image: CodecTypes['pg/text@1']['input'];
       readonly name: CodecTypes['pg/text@1']['input'];
       readonly price: CodecTypes['pg/float8@1']['input'];
       readonly slug: CodecTypes['pg/text@1']['input'];
@@ -536,6 +536,119 @@ export type StorageColumnInputTypes = {
     };
   };
 };
+
+export namespace Models {
+  export type public_User = {
+    id: CodecTypes['pg/int4@1']['output'];
+    name: CodecTypes['pg/text@1']['output'];
+    email: CodecTypes['pg/text@1']['output'];
+    password: CodecTypes['pg/text@1']['output'];
+    isAdmin: CodecTypes['pg/bool@1']['output'];
+    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    cart: public_Cart | null;
+    orders: public_Order[];
+    reviews: public_Review[];
+    readonly [RelationKeys]?: 'cart' | 'orders' | 'reviews';
+  };
+  export type public_Category = {
+    id: CodecTypes['pg/int4@1']['output'];
+    name: CodecTypes['pg/text@1']['output'];
+    slug: CodecTypes['pg/text@1']['output'];
+    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    products: public_Product[];
+    readonly [RelationKeys]?: 'products';
+  };
+  export type public_Product = {
+    id: CodecTypes['pg/int4@1']['output'];
+    name: CodecTypes['pg/text@1']['output'];
+    slug: CodecTypes['pg/text@1']['output'];
+    description: CodecTypes['pg/text@1']['output'] | null;
+    price: CodecTypes['pg/float8@1']['output'];
+    stock: CodecTypes['pg/int4@1']['output'];
+    image: CodecTypes['pg/text@1']['output'];
+    categoryId: CodecTypes['pg/int4@1']['output'];
+    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    cartItems: public_CartItem[];
+    category: public_Category;
+    orderItems: public_OrderItem[];
+    reviews: public_Review[];
+    readonly [RelationKeys]?: 'cartItems' | 'category' | 'orderItems' | 'reviews';
+  };
+  export type public_Cart = {
+    id: CodecTypes['pg/int4@1']['output'];
+    userId: CodecTypes['pg/int4@1']['output'];
+    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    items: public_CartItem[];
+    user: public_User;
+    readonly [RelationKeys]?: 'items' | 'user';
+  };
+  export type public_CartItem = {
+    id: CodecTypes['pg/int4@1']['output'];
+    cartId: CodecTypes['pg/int4@1']['output'];
+    productId: CodecTypes['pg/int4@1']['output'];
+    quantity: CodecTypes['pg/int4@1']['output'];
+    cart: public_Cart;
+    product: public_Product;
+    readonly [RelationKeys]?: 'cart' | 'product';
+  };
+  export type public_Order = {
+    id: CodecTypes['pg/int4@1']['output'];
+    userId: CodecTypes['pg/int4@1']['output'];
+    status: 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
+    totalPrice: CodecTypes['pg/float8@1']['output'];
+    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    fullName: CodecTypes['pg/text@1']['output'];
+    phone: CodecTypes['pg/text@1']['output'];
+    country: CodecTypes['pg/text@1']['output'];
+    city: CodecTypes['pg/text@1']['output'];
+    address: CodecTypes['pg/text@1']['output'];
+    postalCode: CodecTypes['pg/text@1']['output'];
+    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    items: public_OrderItem[];
+    user: public_User;
+    readonly [RelationKeys]?: 'items' | 'user';
+  };
+  export type public_OrderItem = {
+    id: CodecTypes['pg/int4@1']['output'];
+    orderId: CodecTypes['pg/int4@1']['output'];
+    productId: CodecTypes['pg/int4@1']['output'];
+    quantity: CodecTypes['pg/int4@1']['output'];
+    price: CodecTypes['pg/float8@1']['output'];
+    order: public_Order;
+    product: public_Product;
+    readonly [RelationKeys]?: 'order' | 'product';
+  };
+  export type public_Review = {
+    id: CodecTypes['pg/int4@1']['output'];
+    userId: CodecTypes['pg/int4@1']['output'];
+    productId: CodecTypes['pg/int4@1']['output'];
+    rating: CodecTypes['pg/int4@1']['output'];
+    comment: CodecTypes['pg/text@1']['output'] | null;
+    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
+    product: public_Product;
+    user: public_User;
+    readonly [RelationKeys]?: 'product' | 'user';
+  };
+}
+
+export declare const models: {
+  public: {
+    User: Models.public_User;
+    Category: Models.public_Category;
+    Product: Models.public_Product;
+    Cart: Models.public_Cart;
+    CartItem: Models.public_CartItem;
+    Order: Models.public_Order;
+    OrderItem: Models.public_OrderItem;
+    Review: Models.public_Review;
+  };
+};
+
 export type TypeMaps = TypeMapsType<
   CodecTypes,
   QueryOperationTypes,
@@ -923,7 +1036,7 @@ type ContractBase = Omit<
                 readonly image: {
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
-                  readonly nullable: true;
+                  readonly nullable: false;
                 };
                 readonly categoryId: {
                   readonly nativeType: 'int4';
@@ -1181,6 +1294,7 @@ type ContractBase = Omit<
               readonly user: {
                 readonly to: { readonly namespace: 'public' & NamespaceId; readonly model: 'User' };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['userId'];
                   readonly targetFields: readonly ['id'];
@@ -1221,6 +1335,7 @@ type ContractBase = Omit<
               readonly cart: {
                 readonly to: { readonly namespace: 'public' & NamespaceId; readonly model: 'Cart' };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['cartId'];
                   readonly targetFields: readonly ['id'];
@@ -1232,6 +1347,7 @@ type ContractBase = Omit<
                   readonly model: 'Product';
                 };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['productId'];
                   readonly targetFields: readonly ['id'];
@@ -1375,6 +1491,7 @@ type ContractBase = Omit<
               readonly user: {
                 readonly to: { readonly namespace: 'public' & NamespaceId; readonly model: 'User' };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['userId'];
                   readonly targetFields: readonly ['id'];
@@ -1430,6 +1547,7 @@ type ContractBase = Omit<
                   readonly model: 'Order';
                 };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['orderId'];
                   readonly targetFields: readonly ['id'];
@@ -1441,6 +1559,7 @@ type ContractBase = Omit<
                   readonly model: 'Product';
                 };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['productId'];
                   readonly targetFields: readonly ['id'];
@@ -1486,7 +1605,7 @@ type ContractBase = Omit<
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
               };
               readonly image: {
-                readonly nullable: true;
+                readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
               readonly categoryId: {
@@ -1526,6 +1645,7 @@ type ContractBase = Omit<
                   readonly model: 'Category';
                 };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['categoryId'];
                   readonly targetFields: readonly ['id'];
@@ -1615,6 +1735,7 @@ type ContractBase = Omit<
                   readonly model: 'Product';
                 };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['productId'];
                   readonly targetFields: readonly ['id'];
@@ -1623,6 +1744,7 @@ type ContractBase = Omit<
               readonly user: {
                 readonly to: { readonly namespace: 'public' & NamespaceId; readonly model: 'User' };
                 readonly cardinality: 'N:1';
+                readonly nullable: false;
                 readonly on: {
                   readonly localFields: readonly ['userId'];
                   readonly targetFields: readonly ['id'];
@@ -1684,6 +1806,7 @@ type ContractBase = Omit<
               readonly cart: {
                 readonly to: { readonly namespace: 'public' & NamespaceId; readonly model: 'Cart' };
                 readonly cardinality: '1:1';
+                readonly nullable: true;
                 readonly on: {
                   readonly localFields: readonly ['id'];
                   readonly targetFields: readonly ['userId'];

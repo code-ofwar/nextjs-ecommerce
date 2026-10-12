@@ -3,6 +3,16 @@ import SingleOrder from "@/app/orders/SingleOrder";
 import { OrdersResponse } from "@/utils/types";
 import React from "react";
 import UpdateStatus from "./UpdateStatus";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manage Orders",
+  description: "Manage orders in KSP SHOP.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const ManageOrdersPage = async () => {
   const orders: OrdersResponse = await getAllOrders();

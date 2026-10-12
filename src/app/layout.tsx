@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
+import { DOMAIN } from "@/utils/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +17,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KSP Shop",
-  description: "KSP Shopping Emmernce",
+  metadataBase: new URL(`${DOMAIN}`),
+  title: {
+    default: "KSP SHOP",
+    template: "%s | KSP SHOP",
+  },
+  description:
+    "Discover quality products and enjoy a simple shopping experience.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

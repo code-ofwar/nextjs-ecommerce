@@ -3,6 +3,16 @@ import AddCategory from "./AddCategory";
 import DeleteCategory from "./DeleteCategory";
 import UpdateCategory from "./UpdateCategory";
 import { FaEdit } from "react-icons/fa";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manage Categories",
+  description: "Manage categories in KSP SHOP.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const CategoriesPage = async () => {
   const categories = await getCategories();

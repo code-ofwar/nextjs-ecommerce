@@ -1,5 +1,6 @@
 import { DOMAIN } from "@/utils/constants";
 import { SingleProduct } from "@/utils/types";
+import { notFound } from "next/navigation";
 
 export async function getProducts(category?: string) {
   const url = category
@@ -21,6 +22,10 @@ export async function getSingleProduct(productId: string) {
   const response = await fetch(`${DOMAIN}/api/products/by-slug/${productId}`, {
     cache: "no-store",
   });
+
+  if (response.status === 404) {
+    notFound();
+  }
 
   if (!response.ok) {
     throw new Error("Failed to fetch product");

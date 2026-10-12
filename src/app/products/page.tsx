@@ -2,11 +2,40 @@ import { getCategories } from "@/apiCalls/categoryApiCalls";
 import { getProducts } from "@/apiCalls/productApiCalls";
 import ProductItem from "@/components/ProductItem";
 import { Category, Product } from "@/utils/types";
+import { Metadata } from "next";
 import Link from "next/link";
 
 type ProductPageProps = {
   searchParams: Promise<{ category?: string }>;
 };
+
+export async function generateMetadata({
+  searchParams,
+}: ProductPageProps): Promise<Metadata> {
+  const { category } = await searchParams;
+
+  if (!category) {
+    return {
+      title: "Products",
+      description: "Browse our collection of quality products at KSP SHOP.",
+    };
+  }
+
+  const categories: Category[] = await getCategories();
+  const selectedCategory = categories.find((item) => item.slug === category);
+
+  if (!selectedCategory) {
+    return {
+      title: "Products",
+      description: "Browse our collection of quality products at KSP SHOP.",
+    };
+  }
+
+  return {
+    title: selectedCategory.name,
+    description: `Browse ${selectedCategory.name} products at KSP SHOP.`,
+  };
+}
 
 const ProductPage = async ({ searchParams }: ProductPageProps) => {
   const { category } = await searchParams;
@@ -15,7 +44,6 @@ const ProductPage = async ({ searchParams }: ProductPageProps) => {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-5 sm:py-7">
-      {/* Header and Categories */}
       <section className="mx-auto mb-8 max-w-5xl">
         <h1 className="text-xl font-bold text-foreground sm:text-2xl">
           Our Products
@@ -53,7 +81,6 @@ const ProductPage = async ({ searchParams }: ProductPageProps) => {
         </div>
       </section>
 
-      {/* Products Grid */}
       <section className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((item: Product) => (
           <ProductItem product={item} key={item.id} />

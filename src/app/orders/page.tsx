@@ -2,6 +2,17 @@ import { getOrders } from "@/apiCalls/orderApiCalls";
 import { OrdersResponse, OrderStatus } from "@/utils/types";
 import SingleOrder from "./SingleOrder";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Orders",
+  description: "View and track your orders at KSP SHOP.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 const OrdersPage = async () => {
   const orders: OrdersResponse = await getOrders();
 

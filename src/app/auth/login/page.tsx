@@ -3,6 +3,17 @@ import LoginForm from "./LoginForm";
 import { verifyTokenForPage } from "@/utils/verifyToken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login",
+  description: "Login to your KSP SHOP account.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 
 const LoginPage = async () => {
   const cookieStore = await cookies();

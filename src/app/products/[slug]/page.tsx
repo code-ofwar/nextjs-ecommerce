@@ -4,8 +4,30 @@ import AddToCartButton from "@/components/AddToCartButton";
 import ReviewList from "@/components/ReviewList";
 import { SingleProduct, singleSlugParamsProps } from "@/utils/types";
 import { verifyTokenForPage } from "@/utils/verifyToken";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
 import Image from "next/image";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata({
+  params,
+}: singleSlugParamsProps): Promise<Metadata> {
+  const { slug } = await params;
+  const product: SingleProduct = await getSingleProduct(slug);
+
+  return {
+    title: product.name,
+    description:
+      product.description || "Discover quality products at KSP SHOP.",
+    openGraph: {
+      title: product.name,
+      description:
+        product.description || "Discover quality products at KSP SHOP.",
+      images: [`/images/${product.image}`],
+      type: "website",
+    },
+  };
+}
 
 const DetailsPage = async ({ params }: singleSlugParamsProps) => {
   const { slug } = await params;
