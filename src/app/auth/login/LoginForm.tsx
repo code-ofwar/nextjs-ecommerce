@@ -2,6 +2,7 @@
 
 import { DOMAIN } from "@/utils/constants";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
@@ -63,6 +64,15 @@ const LoginForm = () => {
       >
         {loading ? "Loading..." : "Login"}
       </button>
+      <p className="mt-4 text-center text-sm text-muted">
+        Don't have an account?{" "}
+        <Link
+          href="/auth/register"
+          className="font-semibold text-primary hover:underline"
+        >
+          Register
+        </Link>
+      </p>
     </form>
   );
 };

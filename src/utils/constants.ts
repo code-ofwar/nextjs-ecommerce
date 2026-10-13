@@ -1,4 +1,4 @@
-const PRODACTION_DOMAIN = "";
+const PRODACTION_DOMAIN = "http://localhost:3000";
 const DEVELOPMENT_DOMAIN = "http://localhost:3000";
 
 export const DOMAIN =

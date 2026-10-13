@@ -8,6 +8,8 @@ import { getSubtotal } from "@/utils/cartUtils";
 import AddProdcutMessage from "@/components/cart/page";
 import { DOMAIN } from "@/utils/constants";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Shopping Cart",
@@ -19,6 +21,10 @@ export const metadata: Metadata = {
 };
 
 const CartPage = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("jwtToen")?.value as string;
+  if(!token) redirect("/auth/login")
+
   const cart: CartResponse = await getShppingCart();
 
   const subtotal = getSubtotal(cart);

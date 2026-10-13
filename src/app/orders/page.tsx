@@ -3,6 +3,8 @@ import { OrdersResponse, OrderStatus } from "@/utils/types";
 import SingleOrder from "./SingleOrder";
 
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "My Orders",
@@ -14,6 +16,10 @@ export const metadata: Metadata = {
 };
 
 const OrdersPage = async () => {
+  const cookieStore = await cookies();
+    const token = cookieStore.get("jwtToen")?.value as string;
+    if(!token) redirect("/auth/login")
+
   const orders: OrdersResponse = await getOrders();
 
   return (

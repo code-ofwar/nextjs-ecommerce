@@ -9,7 +9,7 @@ const LogoutButton = () => {
   const router = useRouter();
   const logoutButtonHandler = async () => {
     try {
-      await axios.delete(`${DOMAIN}/api/auth/logout`);
+      await axios.delete(`${DOMAIN}/api/users/logout`);
       router.replace("/");
       router.refresh();
     } catch (error) {

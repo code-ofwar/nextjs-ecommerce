@@ -67,7 +67,7 @@ const Navbar = async () => {
                 <LogoutButton />
               </div>
             ) : (
-              <>
+              <div className="flex gap-3">
                 <Link
                   href="/auth/login"
                   className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-muted"
@@ -81,7 +81,7 @@ const Navbar = async () => {
                 >
                   Register
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>

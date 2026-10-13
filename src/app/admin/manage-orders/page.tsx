@@ -4,6 +4,9 @@ import { OrdersResponse } from "@/utils/types";
 import React from "react";
 import UpdateStatus from "./UpdateStatus";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { verifyTokenForPage } from "@/utils/verifyToken";
 
 export const metadata: Metadata = {
   title: "Manage Orders",
@@ -15,6 +18,17 @@ export const metadata: Metadata = {
 };
 
 const ManageOrdersPage = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("jwtToen")?.value as string;
+  const user = verifyTokenForPage(token);
+  if (!user) {
+    redirect("/auth/login");
+  }
+
+  if (!user.isAdmin) {
+    redirect("/");
+  }
+
   const orders: OrdersResponse = await getAllOrders();
   return (
     <section className="mx-auto max-w-5xl px-4 py-6 sm:px-5 sm:py-8">
