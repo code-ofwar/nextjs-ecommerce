@@ -40,7 +40,7 @@ const CategoriesPage = async () => {
                 </span>
               </div>
 
-              <h2 className="mb-1 break-words text-base font-bold text-foreground sm:text-lg">
+              <h2 className="mb-1 wrap-break-word text-base font-bold text-foreground sm:text-lg">
                 Name: {category.name}
               </h2>
 
