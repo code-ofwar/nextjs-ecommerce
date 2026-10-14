@@ -1,5 +1,6 @@
 import { OrdersResponse, OrderStatus } from "@/utils/types";
 import Image from "next/image";
+import Link from "next/link";
 
 type SingleOrderProps = {
   order: OrdersResponse["orders"][number];
@@ -16,7 +17,6 @@ const SingleOrder = ({ order }: SingleOrderProps) => {
 
   return (
     <>
-      {/* Order Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 className="text-base font-semibold sm:text-lg">
@@ -49,7 +49,6 @@ const SingleOrder = ({ order }: SingleOrderProps) => {
         </div>
       </div>
 
-      {/* Order Items */}
       <div className="mt-4 border-t border-border pt-3 sm:mt-5 sm:pt-4">
         {order.orderItems.map((item) => (
           <div
@@ -67,17 +66,24 @@ const SingleOrder = ({ order }: SingleOrderProps) => {
             </div>
 
             <div className="min-w-0 flex-1">
-              <p className="break-words text-sm font-medium sm:text-base">
+              <Link
+                href={`/products/${item.product.slug}`}
+                className="wrap-break-word text-sm font-medium hover:text-primary hover:underline sm:text-base"
+              >
                 {item.product.name}
-              </p>
+              </Link>
 
               <p className="mt-1 text-xs text-muted sm:text-sm">
                 Quantity: {item.quantity}
               </p>
+
+              <p className="mt-1 text-sm font-medium sm:hidden">
+                ${(item.price * item.quantity).toFixed(2)}
+              </p>
             </div>
 
-            <p className="shrink-0 text-sm font-medium sm:text-base">
-              ${item.price.toFixed(2)}
+            <p className="hidden shrink-0 text-sm font-medium sm:block sm:text-base">
+              ${(item.price * item.quantity).toFixed(2)}
             </p>
           </div>
         ))}

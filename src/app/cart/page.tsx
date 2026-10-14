@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 const CartPage = async () => {
   const cookieStore = await cookies();
-  const token = cookieStore.get("jwtToen")?.value as string;
-  if(!token) redirect("/auth/login")
+  const token = cookieStore.get("jwtToken")?.value as string;
+  if (!token) redirect("/auth/login");
 
   const cart: CartResponse = await getShppingCart();
 
@@ -58,7 +58,7 @@ const CartPage = async () => {
                   <div className="min-w-0">
                     <Link
                       href={`/products/${item.product.slug}`}
-                      className="text-lg font-semibold transition hover:opacity-70"
+                      className="wrap-break-word text-sm font-medium hover:text-primary hover:underline sm:text-base"
                     >
                       {item.product.name}
                     </Link>

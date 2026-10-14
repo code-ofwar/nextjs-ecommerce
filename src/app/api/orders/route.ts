@@ -4,6 +4,7 @@ import { createOrderSchema } from "@/utils/validationSchemas";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
 
+// TODO: Handle concurrent stock updates.
 export async function POST(request: NextRequest) {
   try {
     const user = verifyToken(request);

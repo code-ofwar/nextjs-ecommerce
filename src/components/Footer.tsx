@@ -1,7 +1,9 @@
 const Footer = () => {
   return (
-    <div className="h-[30px] flex item-center justify-center text-white bg-gray-500">@Copyright 2026 KSP</div>
-  )
-}
+    <footer className="flex h-12 items-center justify-center bg-gray-500 text-sm text-white">
+      © 2026 KSP SHOP, All rights reserved.
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

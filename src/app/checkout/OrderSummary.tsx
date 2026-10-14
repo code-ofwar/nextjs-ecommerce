@@ -1,6 +1,7 @@
 import { getSubtotal } from "@/utils/cartUtils";
 import { CartResponse } from "@/utils/types";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type OrderSummaryProps = {
@@ -35,15 +36,23 @@ const OrderSummary = ({ cart }: OrderSummaryProps) => {
               </div>
 
               <div className="min-w-0 flex-1">
-                <h3 className="break-words text-sm font-medium sm:text-base">
+                <Link
+                  href={`/products/${item.product.slug}`}
+                  className="wrap-break-word text-sm font-medium hover:text-primary hover:underline sm:text-base"
+                >
                   {item.product.name}
-                </h3>
+                </Link>
+
                 <p className="mt-1 text-sm text-muted">
                   Quantity: {item.quantity}
                 </p>
+
+                <p className="mt-1 text-sm font-medium sm:hidden">
+                  ${(item.product.price * item.quantity).toFixed(2)}
+                </p>
               </div>
 
-              <p className="shrink-0 text-sm font-medium sm:text-base">
+              <p className="hidden shrink-0 text-sm font-medium sm:block sm:text-base">
                 ${(item.product.price * item.quantity).toFixed(2)}
               </p>
             </div>

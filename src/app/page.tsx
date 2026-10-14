@@ -28,14 +28,13 @@ const HomePage = async () => {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-5 sm:py-7">
-      {/* Hero */}
-      <section className="mx-auto max-w-5xl rounded-2xl bg-indigo-200 px-4 py-10 text-center sm:px-6 sm:py-14">
-        <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">
-          Find Your Next Favorite
+      <section className="mx-auto max-w-5xl rounded-2xl bg-indigo-100 px-4 py-12 text-center sm:px-6 sm:py-16">
+        <h1 className="text-2xl font-bold sm:text-3xl md:text-4xl">
+          Everything You Need, All in One Place
         </h1>
 
         <p className="mx-auto mt-4 max-w-xl text-sm text-muted sm:text-base">
-          Discover quality products and enjoy a simple shopping experience.
+          Explore quality products and find your next favorite today.
         </p>
 
         <Link
@@ -46,7 +45,6 @@ const HomePage = async () => {
         </Link>
       </section>
 
-      {/* Categories */}
       <section className="mx-auto max-w-5xl px-0 py-8 sm:px-2 sm:py-10">
         <div className="mb-6 flex items-center justify-between gap-3">
           <h2 className="text-xl font-bold sm:text-2xl">Categories</h2>
@@ -82,7 +80,6 @@ const HomePage = async () => {
         </div>
       </section>
 
-      {/* Featured Products */}
       <section className="mx-auto max-w-5xl px-0 pb-10 sm:px-2 sm:pb-14">
         <div className="mb-6 flex items-center justify-between gap-3">
           <h2 className="text-xl font-bold sm:text-2xl">Featured Products</h2>

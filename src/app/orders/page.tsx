@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const OrdersPage = async () => {
   const cookieStore = await cookies();
-    const token = cookieStore.get("jwtToen")?.value as string;
+    const token = cookieStore.get("jwtToken")?.value as string;
     if(!token) redirect("/auth/login")
 
   const orders: OrdersResponse = await getOrders();

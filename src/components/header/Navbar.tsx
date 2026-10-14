@@ -6,6 +6,8 @@ import MobileMenu from "./MobileMenu";
 import { cookies } from "next/headers";
 import { verifyTokenForPage } from "@/utils/verifyToken";
 import LogoutButton from "./LogoutButton";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+
 
 const Navbar = async () => {
   const cart: CartResponse = await getShppingCartForCount();
@@ -21,8 +23,13 @@ const Navbar = async () => {
   return (
     <nav className="relative border-b border-border bg-card">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
-        <Link href="/" className="text-xl font-bold text-foreground">
-          KSP SHOP
+        <Link
+          href="/"
+          className="flex items-center gap-1 text-xl font-bold text-foreground"
+        >
+          <span>KSP</span>
+           <HiOutlineShoppingBag className="text-primary" size={21} />
+          <span>SHOP</span>
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const ManageOrdersPage = async () => {
   const cookieStore = await cookies();
-  const token = cookieStore.get("jwtToen")?.value as string;
+  const token = cookieStore.get("jwtToken")?.value as string;
   const user = verifyTokenForPage(token);
   if (!user) {
     redirect("/auth/login");
@@ -68,31 +68,31 @@ const ManageOrdersPage = async () => {
               </h3>
 
               <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
-                <p className="break-words">
+                <p className="wrap-break-word">
                   <span className="font-medium">Name:</span>{" "}
                   {order.order.fullName}
                 </p>
 
-                <p className="break-words">
+                <p className="wrap-break-word">
                   <span className="font-medium">Phone:</span>{" "}
                   {order.order.phone}
                 </p>
 
-                <p className="break-words">
+                <p className="wrap-break-word">
                   <span className="font-medium">Country:</span>{" "}
                   {order.order.country}
                 </p>
 
-                <p className="break-words">
+                <p className="wrap-break-word">
                   <span className="font-medium">City:</span> {order.order.city}
                 </p>
 
-                <p className="break-words sm:col-span-2">
+                <p className="wrap-break-word sm:col-span-2">
                   <span className="font-medium">Address:</span>{" "}
                   {order.order.address}
                 </p>
 
-                <p className="break-words">
+                <p className="wrap-break-word">
                   <span className="font-medium">Postal Code:</span>{" "}
                   {order.order.postalCode}
                 </p>
