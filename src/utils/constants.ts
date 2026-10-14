@@ -1,5 +1,5 @@
 const PRODACTION_DOMAIN =
-  "https://nextjs-ecommerce-6zkrvis2d-code-ofwar.vercel.app";
+  "https://nextjs-ecommerce-phi-pearl.vercel.app";
 const DEVELOPMENT_DOMAIN = "http://localhost:3000";
 
 export const DOMAIN =
