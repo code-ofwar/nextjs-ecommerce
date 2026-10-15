@@ -46,7 +46,7 @@ const CartPage = async () => {
                   key={item.product.id}
                   className="flex flex-col gap-4 rounded-xl border border-border bg-card p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="relative h-20 w-25 shrink-0 overflow-hidden rounded-lg border border-border">
+                  <div className="relative h-20 w-25 shrink-0 overflow-hidden rounded-lg">
                     <Image
                       src={`/images/${item.product.image}`}
                       alt={item.product.name}

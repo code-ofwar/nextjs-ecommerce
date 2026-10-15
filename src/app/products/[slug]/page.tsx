@@ -7,7 +7,6 @@ import { verifyTokenForPage } from "@/utils/verifyToken";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -47,13 +46,13 @@ const DetailsPage = async ({ params }: singleSlugParamsProps) => {
   return (
     <main className="w-full bg-background px-4 py-6 text-foreground sm:px-6 sm:py-8">
       <section className="mx-auto flex max-w-6xl flex-col gap-5 md:flex-row md:items-start md:gap-8">
-        <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl bg-border md:mx-0 md:flex-1">
+        <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl bg-card md:mx-0 md:flex-1">
           <Image
             src={`/images/${product.image}`}
             alt={product.name}
             fill
             sizes="(max-width: 767px) 100vw, (max-width: 1152px) 50vw, 448px"
-            className="object-cover"
+            className="object-contain"
           />
         </div>
 
@@ -76,9 +75,24 @@ const DetailsPage = async ({ params }: singleSlugParamsProps) => {
 
           <p className="text-2xl font-bold text-primary">${product.price}</p>
 
-          <p className="text-sm text-muted">Stock: {product.stock}</p>
+          {product.stock > 0 ? (
+            <p className="text-sm text-muted">Stock: {product.stock}</p>
+          ) : (
+            <p className="w-fit rounded-full bg-red-500/10 px-3 py-1 text-sm font-semibold text-red-500">
+              Out of Stock
+            </p>
+          )}
 
-          <AddToCartButton productId={product.id} />
+          {product.stock > 0 ? (
+            <AddToCartButton productId={product.id} />
+          ) : (
+            <button
+              disabled
+              className="w-fit cursor-not-allowed rounded-lg bg-border px-6 py-3 text-muted"
+            >
+              Add to cart
+            </button>
+          )}
         </div>
       </section>
 

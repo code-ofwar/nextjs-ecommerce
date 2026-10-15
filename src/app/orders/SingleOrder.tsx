@@ -55,13 +55,13 @@ const SingleOrder = ({ order }: SingleOrderProps) => {
             key={item.id}
             className="flex items-center gap-3 border-b border-border py-3 last:border-b-0 sm:gap-4"
           >
-            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-md bg-border sm:h-16 sm:w-16">
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-md bg-card sm:h-16 sm:w-16">
               <Image
                 src={`/images/${item.product.image}`}
                 alt={item.product.name}
                 fill
                 sizes="64px"
-                className="object-cover"
+                className="object-contain"
               />
             </div>
 

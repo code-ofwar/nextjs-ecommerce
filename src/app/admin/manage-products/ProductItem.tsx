@@ -60,7 +60,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <DeleteProdcut productId={product.id} />
 
           <Link
-            href={`${DOMAIN}/products/${product.id}`}
+            href={`${DOMAIN}/products/${product.slug}`}
             className="rounded-md border border-border bg-foreground px-3 py-2 text-sm font-medium text-white transition-colors hover:opacity-80 sm:px-4"
           >
             Manage Reviews (admin)

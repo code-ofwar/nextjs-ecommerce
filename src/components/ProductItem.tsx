@@ -9,12 +9,12 @@ type ProductItemProps = {
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
     <div className="group w-full max-w-xs overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative aspect-square overflow-hidden bg-border">
+      <div className="relative aspect-square overflow-hidden bg-card">
         <Image
           src={`/images/${product.image}`}
           alt={product.name}
           fill
-          className="object-cover transition duration-300 group-hover"
+          className="object-contain transition-transform duration-300 ease-in-out group-hover:scale-105"
         />
       </div>
 
