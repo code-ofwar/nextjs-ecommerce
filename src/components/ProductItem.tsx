@@ -20,7 +20,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
       <div className="p-4 sm:p-5">
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-          <h2 className="line-clamp-1 text-base font-bold text-foreground sm:text-lg">
+          <h2 className="line-clamp-2 text-base font-bold text-foreground sm:text-lg">
             {product.name}
           </h2>
 

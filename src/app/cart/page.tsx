@@ -51,7 +51,7 @@ const CartPage = async () => {
                       src={`/images/${item.product.image}`}
                       alt={item.product.name}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </div>
 
