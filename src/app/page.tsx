@@ -93,9 +93,12 @@ const HomePage = async () => {
         </div>
 
         <div className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {products.slice(0, 4).map((product: Product) => (
-            <ProductItem key={product.id} product={product} />
-          ))}
+          {[...products]
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 4)
+            .map((product: Product) => (
+              <ProductItem key={product.id} product={product} />
+            ))}
         </div>
       </section>
     </main>
