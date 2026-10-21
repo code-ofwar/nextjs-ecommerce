@@ -1,5 +1,4 @@
-const PRODACTION_DOMAIN =
-  "https://nextjs-ecommerce-phi-pearl.vercel.app";
+const PRODACTION_DOMAIN = "https://kspshop.vercel.app";
 const DEVELOPMENT_DOMAIN = "http://localhost:3000";
 
 export const DOMAIN =

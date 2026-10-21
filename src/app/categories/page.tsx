@@ -47,7 +47,7 @@ const CategoriesPage = async () => {
               {categoryIcons[category.slug] ?? <FaTag size={32} />}
             </div>
 
-            <h2 className="break-words text-lg font-bold text-foreground sm:text-xl">
+            <h2 className="wrap-break-word text-lg font-bold text-foreground sm:text-xl">
               {category.name}
             </h2>
 
