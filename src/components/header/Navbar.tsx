@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import { verifyTokenForPage } from "@/utils/verifyToken";
 import LogoutButton from "./LogoutButton";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-
+import { BsGithub } from "react-icons/bs";
 
 const Navbar = async () => {
   const cart: CartResponse = await getShppingCartForCount();
@@ -28,13 +28,19 @@ const Navbar = async () => {
           className="flex items-center gap-1 text-xl font-bold text-foreground"
         >
           <span>KSP</span>
-           <HiOutlineShoppingBag className="text-primary" size={21} />
+          <HiOutlineShoppingBag className="text-primary" size={21} />
           <span>SHOP</span>
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">
-          <Link href="/" className="text-muted hover:text-foreground">
-            Home
+          <Link
+            href="https://github.com/code-ofwar/nextjs-ecommerce"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-muted transition hover:text-foreground"
+          >
+            <BsGithub size={18} />
+            GitHub
           </Link>
 
           <Link href="/admin" className="text-muted hover:text-foreground">

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { JWTPayload } from "@/utils/types";
 import LogoutButton from "./LogoutButton";
+import { BsGithub } from "react-icons/bs";
 
 type MobileMenuProps = {
   payload: JWTPayload | null;
@@ -29,11 +30,14 @@ const MobileMenu = ({ payload }: MobileMenuProps) => {
         <div className="absolute left-0 top-full z-50 w-full border-b border-border bg-card px-6 py-4">
           <div className="flex flex-col gap-4">
             <Link
-              href="/"
+              href="https://github.com/code-ofwar/nextjs-ecommerce"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="text-muted hover:text-foreground"
+              className="flex items-center gap-2 text-muted transition hover:text-foreground"
             >
-              Home
+              GitHub
+              <BsGithub size={18} />
             </Link>
 
             <Link
@@ -45,19 +49,19 @@ const MobileMenu = ({ payload }: MobileMenuProps) => {
             </Link>
 
             <Link
-              href="/categories"
-              onClick={() => setIsOpen(false)}
-              className="text-muted hover:text-foreground"
-            >
-              Categories
-            </Link>
-
-            <Link
               href="/orders"
               onClick={() => setIsOpen(false)}
               className="text-muted hover:text-foreground"
             >
               Orders
+            </Link>
+
+            <Link
+              href="/categories"
+              onClick={() => setIsOpen(false)}
+              className="text-muted hover:text-foreground"
+            >
+              Categories
             </Link>
 
             <Link
