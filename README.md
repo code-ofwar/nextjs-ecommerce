@@ -16,6 +16,24 @@ A full-stack e-commerce platform built with Next.js, TypeScript, Prisma, and Pos
 - Transaction-based order processing and stock management
 - Responsive user interface
 
+## Screenshots
+
+### Home Page
+
+![KSP Shop Home Page](./screenshots/ksp-home-page.png)
+
+### Single Product Page
+
+![Single Product](./screenshots/ksp-single-product-page.png)
+
+### Admin — Create Product
+
+![Create Product](./screenshots/ksp-create-product-page.png)
+
+### Admin — Manage Products
+
+![Manage Products](./screenshots/ksp-manage-products-page.png)
+
 ## Tech Stack
 
 - **Framework:** Next.js
@@ -60,3 +78,23 @@ The application includes server-side authorization, input validation, protected 
 ## Author
 
 GitHub: https://github.com/code-ofwar
+
+## Known Issues
+
+### 1. Prisma Version Compatibility
+
+The project currently uses a Prisma release-candidate version, which may cause compatibility issues.
+
+**Temporary workaround:** The `migrations` directory is excluded from TypeScript checks in `tsconfig.json`:
+
+```json
+"exclude": ["node_modules", "migrations"]
+```
+
+This workaround is temporary and should be reviewed after upgrading to a compatible Prisma version.
+
+### 2. Concurrent Stock Updates
+
+The current order creation logic does not fully prevent race conditions when multiple orders attempt to purchase the same product simultaneously. This may result in incorrect stock levels or overselling.
+
+**Planned improvement:** Implement concurrency-safe stock updates using atomic conditional database updates or appropriate database locking and transaction isolation.
