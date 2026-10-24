@@ -1,6 +1,6 @@
 # KSP Shop — Full-Stack E-commerce
 
-A full-stack e-commerce platform built with Next.js, TypeScript, Prisma, and PostgreSQL, featuring customer shopping functionality and an admin dashboard.
+A full-stack e-commerce platform built with Next.js, TypeScript, Prisma, and PostgreSQL, featuring customer shopping functionality and administrative management features.
 
 ## Features
 
@@ -9,7 +9,7 @@ A full-stack e-commerce platform built with Next.js, TypeScript, Prisma, and Pos
 - Product details and customer reviews
 - Shopping cart and checkout
 - Order creation and tracking
-- Admin dashboard for managing products, categories, and orders
+- Product, category creation and management, and order status update
 - Role-based authorization and protected routes
 - Input validation using Zod
 - Password hashing and JWT authentication
