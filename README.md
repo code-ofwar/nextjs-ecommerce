@@ -9,7 +9,7 @@ A full-stack e-commerce platform built with Next.js, TypeScript, Prisma, and Pos
 - Product details and customer reviews
 - Shopping cart and checkout
 - Order creation and tracking
-- Product, category creation and management, and orders status update
+- Product, category creation and management, and order status update
 - Role-based authorization and protected routes
 - Input validation using Zod
 - Password hashing and JWT authentication
