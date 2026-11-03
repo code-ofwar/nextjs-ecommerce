@@ -2,6 +2,10 @@
 
 A full-stack e-commerce platform built with Next.js, TypeScript, Prisma, and PostgreSQL, featuring customer shopping functionality and administrative management features.
 
+## Live Demo
+
+[Visit KSP-SHOP](https://kspshop.vercel.app/)
+
 ## Features
 
 - User registration, login, and secure authentication
@@ -75,9 +79,16 @@ A full-stack e-commerce platform built with Next.js, TypeScript, Prisma, and Pos
 
 The application includes server-side authorization, input validation, protected resources, and safeguards for order processing.
 
+## Deployment
+
+The website is deployed on Vercel.
+
 ## Author
 
-GitHub: https://github.com/code-ofwar
+**Mohammadreza Mahavi**
+
+- [GitHub](https://github.com/code-ofwar)
+- [Portfolio](https://codeofwar-portfolio.vercel.app/)
 
 ## Known Issues
 
